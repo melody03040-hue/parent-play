@@ -1,315 +1,986 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>親子遊戲小站</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>親子遊戲小站</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+*{
+  box-sizing:border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-      background:
-        radial-gradient(circle at 10% 10%, #fff4f7 0, transparent 28%),
-        radial-gradient(circle at 90% 20%, #f5f2ff 0, transparent 28%),
-        linear-gradient(180deg, #fffaf7 0%, #fffdfb 100%);
-      color: #5e5350;
-      min-height: 100vh;
-    }
+:root{
+  --ink:#655754;
+  --soft-ink:#927f79;
+  --cream:#fffaf6;
+  --paper:#fffefd;
+  --line:#eee0da;
+  --pink:#f9dfe5;
+  --pink2:#fff1f4;
+  --peach:#fde8db;
+  --yellow:#fff0c9;
+  --green:#e4f1df;
+  --blue:#e4eefb;
+  --purple:#eee7fa;
+  --shadow:0 14px 40px rgba(120,94,84,.09);
+}
 
-    .page {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 28px 0 50px;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background: rgba(255,255,255,0.82);
-      border: 1px solid rgba(238, 220, 215, 0.9);
-      border-radius: 34px;
-      padding: 38px 30px;
-      box-shadow: 0 18px 50px rgba(146, 111, 104, 0.10);
-      text-align: center;
-    }
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:
+    "Noto Sans TC",
+    "PingFang TC",
+    "Microsoft JhengHei",
+    sans-serif;
 
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      filter: blur(4px);
-      opacity: .45;
-      z-index: 0;
-    }
+  background:
+    radial-gradient(circle at 8% 10%, #fff0f3 0 10%, transparent 30%),
+    radial-gradient(circle at 92% 18%, #f4efff 0 10%, transparent 30%),
+    radial-gradient(circle at 50% 95%, #fff5dd 0 8%, transparent 30%),
+    #fffaf8;
 
-    .hero::before {
-      background: #ffe2ea;
-      top: -80px;
-      left: -55px;
-    }
+  min-height:100vh;
+}
 
-    .hero::after {
-      background: #e7e2ff;
-      right: -55px;
-      bottom: -90px;
-    }
+/* ======================
+   上方導覽
+====================== */
 
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-    }
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  padding:12px 18px;
+  background:rgba(255,250,248,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(229,210,203,.75);
+}
 
-    .mini-label {
-      display: inline-block;
-      background: #fff2df;
-      color: #9d7550;
-      padding: 8px 15px;
-      border-radius: 999px;
-      font-size: 14px;
-      margin-bottom: 12px;
-      box-shadow: inset 0 0 0 1px rgba(197, 160, 121, .12);
-    }
+.nav{
+  width:min(1120px,100%);
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
 
-    h1 {
-      margin: 0;
-      font-size: clamp(32px, 6vw, 56px);
-      letter-spacing: 2px;
-      color: #6c5a56;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  letter-spacing:1px;
+}
 
-    .subtitle {
-      margin: 14px auto 0;
-      max-width: 680px;
-      font-size: 16px;
-      line-height: 1.9;
-      color: #8d7c77;
-    }
+.brand-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:0 5px 18px rgba(120,90,80,.10);
+  border:1px solid #f1e2dd;
+  font-size:22px;
+}
 
-    .decoration {
-      font-size: 28px;
-      margin-top: 18px;
-      letter-spacing: 8px;
-    }
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
 
-    .section-title {
-      text-align: center;
-      margin: 38px 0 18px;
-    }
+.nav-links a{
+  text-decoration:none;
+  color:#826e68;
+  font-size:14px;
+  font-weight:700;
+  padding:9px 13px;
+  border-radius:999px;
+}
 
-    .section-title h2 {
-      margin: 0;
-      font-size: 25px;
-      color: #6f605c;
-    }
+.nav-links a:hover{
+  background:#f8e8e4;
+}
 
-    .section-title p {
-      margin: 7px 0 0;
-      color: #a0918d;
-      font-size: 14px;
-    }
+/* ======================
+   主畫面
+====================== */
 
-    .tools {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
+.container{
+  width:min(1120px,calc(100% - 30px));
+  margin:auto;
+  padding:28px 0 55px;
+}
 
-    .tool-card {
-      position: relative;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid #eee3df;
-      border-radius: 26px;
-      padding: 22px;
-      min-height: 220px;
-      box-shadow: 0 12px 32px rgba(111, 87, 80, 0.08);
-      transition: transform .2s ease, box-shadow .2s ease;
-      overflow: hidden;
-    }
+/* ======================
+   HERO
+====================== */
 
-    .tool-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 38px rgba(111, 87, 80, 0.12);
-    }
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:430px;
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  align-items:center;
+  gap:24px;
 
-    .tool-card::after {
-      content: "";
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      right: -25px;
-      bottom: -30px;
-      opacity: .35;
-    }
+  border:1px solid var(--line);
+  border-radius:38px;
+  padding:52px 54px;
 
-    .pink::after { background: #ffdce6; }
-    .blue::after { background: #dcecff; }
-    .yellow::after { background: #fff0bd; }
-    .green::after { background: #dff2df; }
-    .purple::after { background: #e7dfff; }
-    .peach::after { background: #ffe0cf; }
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,248,246,.92));
 
-    .icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      font-size: 28px;
-      margin-bottom: 16px;
-      background: #fff7f4;
-    }
+  box-shadow:0 22px 60px rgba(112,84,73,.10);
+}
 
-    .tool-card h3 {
-      margin: 0 0 8px;
-      font-size: 20px;
-      color: #665752;
-    }
+.hero:before{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  background:#ffe6ed;
+  border-radius:50%;
+  top:-120px;
+  left:-90px;
+  opacity:.75;
+}
 
-    .tool-card p {
-      margin: 0;
-      line-height: 1.75;
-      color: #968680;
-      font-size: 14px;
-    }
+.hero:after{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  background:#ede7ff;
+  border-radius:50%;
+  right:-110px;
+  bottom:-150px;
+  opacity:.7;
+}
 
-    .tool-button {
-      margin-top: 18px;
-      border: none;
-      border-radius: 999px;
-      padding: 10px 17px;
-      background: #f7ebe7;
-      color: #7c6862;
-      cursor: pointer;
-      font-size: 14px;
-    }
+.hero-text,
+.hero-art{
+  position:relative;
+  z-index:2;
+}
 
-    .tool-button:hover {
-      background: #f2ded8;
-    }
+.small-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:#fff0e9;
+  color:#9c7467;
+  font-size:14px;
+  font-weight:800;
+  border:1px solid #f1dcd5;
+}
 
-    .footer {
-      margin-top: 34px;
-      text-align: center;
-      background: rgba(255,255,255,.7);
-      border: 1px dashed #e5d8d3;
-      border-radius: 22px;
-      padding: 18px;
-      color: #a08f8a;
-      font-size: 13px;
-    }
+.hero h1{
+  margin:19px 0 13px;
+  font-size:clamp(38px,5.8vw,64px);
+  line-height:1.18;
+  letter-spacing:2px;
+  color:#665652;
+}
 
-    @media (max-width: 900px) {
-      .tools {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+.hero h1 span{
+  color:#d28c96;
+}
 
-    @media (max-width: 620px) {
-      .page {
-        width: min(100% - 20px, 1120px);
-        padding-top: 14px;
-      }
+.hero-desc{
+  max-width:610px;
+  line-height:2;
+  font-size:16px;
+  color:#917c76;
+  margin:0;
+}
 
-      .hero {
-        padding: 30px 18px;
-        border-radius: 26px;
-      }
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:24px;
+}
 
-      .tools {
-        grid-template-columns: 1fr;
-      }
+.primary-btn,
+.secondary-btn{
+  border:0;
+  border-radius:999px;
+  padding:13px 20px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
 
-      .tool-card {
-        min-height: auto;
-      }
-    }
-  </style>
+.primary-btn{
+  background:#806d68;
+  color:white;
+  box-shadow:0 8px 18px rgba(100,80,72,.18);
+}
+
+.secondary-btn{
+  background:#fff;
+  color:#806d68;
+  border:1px solid #eadbd6;
+}
+
+/* ======================
+   HERO 圖案
+====================== */
+
+.hero-art{
+  display:grid;
+  place-items:center;
+}
+
+.art-board{
+  width:min(340px,100%);
+  aspect-ratio:1/1;
+  position:relative;
+}
+
+.big-circle{
+  position:absolute;
+  inset:12%;
+  border-radius:50%;
+  background:linear-gradient(145deg,#fff4e8,#ffeaf0);
+  border:1px solid #f3ded8;
+  box-shadow:
+    0 18px 40px rgba(120,90,82,.12),
+    inset 0 0 0 12px rgba(255,255,255,.55);
+}
+
+.bunny{
+  position:absolute;
+  left:50%;
+  top:53%;
+  transform:translate(-50%,-50%);
+  font-size:108px;
+  filter:drop-shadow(0 8px 8px rgba(110,80,70,.08));
+}
+
+.float{
+  position:absolute;
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border-radius:19px;
+  background:#fff;
+  border:1px solid #f0e0db;
+  box-shadow:0 12px 28px rgba(100,80,74,.10);
+  font-size:28px;
+}
+
+.f1{left:2%;top:10%;transform:rotate(-7deg);}
+.f2{right:2%;top:15%;transform:rotate(8deg);}
+.f3{left:4%;bottom:12%;transform:rotate(6deg);}
+.f4{right:3%;bottom:7%;transform:rotate(-8deg);}
+
+/* ======================
+   小資訊列
+====================== */
+
+.quick-info{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:18px 0 0;
+}
+
+.info-pill{
+  background:rgba(255,255,255,.85);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:16px;
+  box-shadow:0 8px 24px rgba(100,80,70,.05);
+  text-align:center;
+  font-size:13px;
+  color:#927e78;
+}
+
+.info-pill strong{
+  display:block;
+  font-size:17px;
+  margin-bottom:3px;
+  color:#6d5d59;
+}
+
+/* ======================
+   Section title
+====================== */
+
+.section-head{
+  text-align:center;
+  margin:54px 0 23px;
+}
+
+.section-kicker{
+  display:inline-block;
+  margin-bottom:7px;
+  font-size:13px;
+  font-weight:800;
+  color:#c18d93;
+  letter-spacing:1px;
+}
+
+.section-head h2{
+  margin:0;
+  font-size:31px;
+  color:#685955;
+}
+
+.section-head p{
+  margin:9px auto 0;
+  color:#9b8983;
+  font-size:14px;
+  line-height:1.8;
+}
+
+/* ======================
+   工具卡片
+====================== */
+
+.tools{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  background:rgba(255,255,255,.91);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:22px 21px 20px;
+  min-height:260px;
+  box-shadow:var(--shadow);
+  transition:.22s ease;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 44px rgba(113,87,77,.13);
+}
+
+.card:after{
+  content:"";
+  position:absolute;
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  right:-46px;
+  bottom:-48px;
+  opacity:.65;
+}
+
+.c-pink:after{background:#fde1e8;}
+.c-yellow:after{background:#fff0c1;}
+.c-blue:after{background:#e3ecfb;}
+.c-purple:after{background:#ece3fa;}
+.c-green:after{background:#e1efdd;}
+.c-peach:after{background:#fae4d7;}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
+}
+
+.card-icon{
+  width:62px;
+  height:62px;
+  border-radius:20px;
+  display:grid;
+  place-items:center;
+  font-size:31px;
+  background:#fff7f4;
+  box-shadow:inset 0 0 0 1px rgba(128,95,84,.06);
+}
+
+.card-number{
+  color:#cab6b0;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.card h3{
+  margin:17px 0 8px;
+  font-size:20px;
+  color:#665753;
+}
+
+.card p{
+  margin:0;
+  color:#98857f;
+  line-height:1.8;
+  font-size:14px;
+}
+
+.card-btn{
+  position:absolute;
+  left:21px;
+  bottom:20px;
+  z-index:2;
+  border:0;
+  border-radius:999px;
+  padding:9px 15px;
+  background:#f8ebe7;
+  color:#806b65;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.card-btn:hover{
+  background:#eddad4;
+}
+
+/* ======================
+   親子小天地
+====================== */
+
+.feature-box{
+  margin-top:48px;
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:18px;
+}
+
+.feature-card{
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:29px;
+  background:rgba(255,255,255,.88);
+  box-shadow:var(--shadow);
+}
+
+.feature-card.soft{
+  background:
+    linear-gradient(145deg,#fff4ec,#fffafe);
+}
+
+.feature-card h3{
+  font-size:24px;
+  margin:0 0 9px;
+}
+
+.feature-card p{
+  color:#95817b;
+  line-height:1.9;
+  font-size:14px;
+}
+
+.stickers{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:16px;
+}
+
+.sticker{
+  padding:9px 13px;
+  border-radius:14px;
+  border:1px solid #eee0dc;
+  background:white;
+  font-size:13px;
+  box-shadow:0 5px 13px rgba(100,80,70,.05);
+}
+
+/* ======================
+   Footer
+====================== */
+
+.footer{
+  margin-top:46px;
+  text-align:center;
+  padding:26px 16px;
+  border-top:1px dashed #e4d2cc;
+  color:#a28f89;
+  font-size:13px;
+}
+
+.footer-icons{
+  font-size:22px;
+  margin-bottom:9px;
+  letter-spacing:8px;
+}
+
+/* ======================
+   手機版
+====================== */
+
+@media(max-width:980px){
+
+  .tools{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero{
+    padding:40px 32px;
+  }
+}
+
+@media(max-width:760px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding:36px 24px;
+    text-align:center;
+  }
+
+  .hero-desc{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .hero-art{
+    margin-top:5px;
+  }
+
+  .art-board{
+    max-width:280px;
+  }
+
+  .quick-info{
+    grid-template-columns:1fr;
+  }
+
+  .feature-box{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:540px){
+
+  .container{
+    width:calc(100% - 18px);
+    padding-top:14px;
+  }
+
+  .hero{
+    border-radius:28px;
+    padding:30px 18px;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .tools{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    min-height:238px;
+  }
+
+  .section-head{
+    margin-top:40px;
+  }
+}
+</style>
 </head>
 
 <body>
-  <main class="page">
 
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="mini-label">🌷 親子生活 × 遊戲化工具</div>
+<header class="topbar">
+  <nav class="nav">
 
-        <h1>親子遊戲小站</h1>
-
-        <p class="subtitle">
-          把每天的小任務、閱讀、行事曆與獎勵，
-          變成更可愛、更有趣、更有成就感的親子日常。
-        </p>
-
-        <div class="decoration">🌼 🐰 🎀 🌿 ✨</div>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-title">
-        <h2>今天想用哪個小工具？</h2>
-        <p>先從簡單好玩的功能開始，之後我們會逐一加入完整互動功能。</p>
-      </div>
-
-      <div class="tools">
-
-        <article class="tool-card pink">
-          <div class="icon">⭐</div>
-          <h3>兒童任務表</h3>
-          <p>建立每天要完成的小任務，完成後打勾並累積星星。</p>
-          <button class="tool-button">開始使用</button>
-        </article>
-
-        <article class="tool-card yellow">
-          <div class="icon">🎁</div>
-          <h3>獎勵兌換所</h3>
-          <p>用累積的星星兌換自己設定的小獎勵，讓完成任務更有動力。</p>
-          <button class="tool-button">開始使用</button>
-        </article>
-
-        <article class="tool-card blue">
-          <div class="icon">📅</div>
-          <h3>親子行事曆</h3>
-          <p>記錄課程、活動、重要日期與家庭安排，一眼看懂每天行程。</p>
-          <button class="tool-button">開始使用</button>
-        </article>
-
-        <article class="tool-card purple">
-          <div class="icon">🎡</div>
-          <h3>今天做什麼</h3>
-          <p>不知道今天玩什麼？用可愛轉盤隨機抽出親子活動。</p>
-          <button class="tool-button">開始使用</button>
-        </article>
-
-        <article class="tool-card green">
-          <div class="icon">📚</div>
-          <h3>閱讀紀錄</h3>
-          <p>記錄讀過的書、閱讀日期與完成進度，建立自己的小書架。</p>
-          <button class="tool-button">開始使用</button>
-        </article>
-
-        <article class="tool-card peach">
-          <div class="icon">🏆</div>
-          <h3>成就徽章</h3>
-          <p>完成指定任務後獲得不同徽章，打造專屬成就收藏牆。</p>
-          <button class="tool-button">開始使用</button>
-        </article>
-
-      </div>
-    </section>
-
-    <div class="footer">
-      🌸 每一天的小進步，都值得被看見與收藏。
+    <div class="brand">
+      <div class="brand-icon">🐰</div>
+      <span>親子遊戲小站</span>
     </div>
 
-  </main>
+    <div class="nav-links">
+      <a href="#home">首頁</a>
+      <a href="#tools">小工具</a>
+      <a href="#family">親子天地</a>
+    </div>
+
+  </nav>
+</header>
+
+
+<main class="container">
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+  <div class="hero-text">
+
+    <div class="small-tag">
+      🌷 Parenting × Play × Daily Life
+    </div>
+
+    <h1>
+      把每天的日常<br>
+      變成<span>好玩的親子遊戲</span>
+    </h1>
+
+    <p class="hero-desc">
+      任務、獎勵、行事曆、閱讀與親子活動，
+      全部整理在一個可愛又簡單的小天地。
+      讓孩子更有參與感，也讓每天的生活更輕鬆。
+    </p>
+
+    <div class="hero-buttons">
+
+      <button class="primary-btn"
+        onclick="document.getElementById('tools').scrollIntoView()">
+        開始探索小工具
+      </button>
+
+      <button class="secondary-btn"
+        onclick="document.getElementById('family').scrollIntoView()">
+        看看親子天地
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-art">
+
+    <div class="art-board">
+
+      <div class="big-circle"></div>
+
+      <div class="bunny">🐰</div>
+
+      <div class="float f1">🌷</div>
+      <div class="float f2">🎀</div>
+      <div class="float f3">🌼</div>
+      <div class="float f4">✨</div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="quick-info">
+
+  <div class="info-pill">
+    <strong>⭐ 每日任務</strong>
+    把生活習慣變成遊戲
+  </div>
+
+  <div class="info-pill">
+    <strong>🎁 獎勵系統</strong>
+    累積成就更有動力
+  </div>
+
+  <div class="info-pill">
+    <strong>🌷 親子時光</strong>
+    收藏每一天的小回憶
+  </div>
+
+</div>
+
+
+<!-- TOOLS -->
+
+<section id="tools">
+
+  <div class="section-head">
+
+    <span class="section-kicker">
+      OUR LITTLE TOOLS
+    </span>
+
+    <h2>今天想用哪個小工具？</h2>
+
+    <p>
+      每一個工具都會逐步做成真正可以使用、
+      可以保存資料的親子小幫手。
+    </p>
+
+  </div>
+
+
+  <div class="tools">
+
+    <article class="card c-pink">
+
+      <div class="card-top">
+        <div class="card-icon">⭐</div>
+        <span class="card-number">01</span>
+      </div>
+
+      <h3>兒童任務表</h3>
+
+      <p>
+        建立每日小任務，完成後打勾，
+        累積星星與每天的小成就。
+      </p>
+
+      <button class="card-btn"
+        onclick="comingSoon('兒童任務表')">
+        開始使用
+      </button>
+
+    </article>
+
+
+    <article class="card c-yellow">
+
+      <div class="card-top">
+        <div class="card-icon">🎁</div>
+        <span class="card-number">02</span>
+      </div>
+
+      <h3>獎勵兌換所</h3>
+
+      <p>
+        把努力累積成星星，
+        再兌換自己設定的小獎勵。
+      </p>
+
+      <button class="card-btn"
+        onclick="comingSoon('獎勵兌換所')">
+        開始使用
+      </button>
+
+    </article>
+
+
+    <article class="card c-blue">
+
+      <div class="card-top">
+        <div class="card-icon">📅</div>
+        <span class="card-number">03</span>
+      </div>
+
+      <h3>親子行事曆</h3>
+
+      <p>
+        課程、家庭活動與重要日期，
+        集中整理一眼就能看懂。
+      </p>
+
+      <button class="card-btn"
+        onclick="comingSoon('親子行事曆')">
+        開始使用
+      </button>
+
+    </article>
+
+
+    <article class="card c-purple">
+
+      <div class="card-top">
+        <div class="card-icon">🎡</div>
+        <span class="card-number">04</span>
+      </div>
+
+      <h3>今天做什麼</h3>
+
+      <p>
+        不知道今天玩什麼？
+        交給幸運轉盤幫你決定親子活動。
+      </p>
+
+      <button class="card-btn"
+        onclick="comingSoon('今天做什麼')">
+        開始使用
+      </button>
+
+    </article>
+
+
+    <article class="card c-green">
+
+      <div class="card-top">
+        <div class="card-icon">📚</div>
+        <span class="card-number">05</span>
+      </div>
+
+      <h3>閱讀紀錄</h3>
+
+      <p>
+        收藏讀過的書、閱讀日期、
+        閱讀進度與自己的小心得。
+      </p>
+
+      <button class="card-btn"
+        onclick="comingSoon('閱讀紀錄')">
+        開始使用
+      </button>
+
+    </article>
+
+
+    <article class="card c-peach">
+
+      <div class="card-top">
+        <div class="card-icon">🏆</div>
+        <span class="card-number">06</span>
+      </div>
+
+      <h3>成就徽章</h3>
+
+      <p>
+        完成挑戰解鎖小徽章，
+        建立自己的專屬成就收藏牆。
+      </p>
+
+      <button class="card-btn"
+        onclick="comingSoon('成就徽章')">
+        開始使用
+      </button>
+
+    </article>
+
+
+    <article class="card c-pink">
+
+      <div class="card-top">
+        <div class="card-icon">🧹</div>
+        <span class="card-number">07</span>
+      </div>
+
+      <h3>家事抽籤</h3>
+
+      <p>
+        用抽籤決定今天的小家事，
+        把整理變得更有遊戲感。
+      </p>
+
+      <button class="card-btn"
+        onclick="comingSoon('家事抽籤')">
+        開始使用
+      </button>
+
+    </article>
+
+
+    <article class="card c-blue">
+
+      <div class="card-top">
+        <div class="card-icon">💌</div>
+        <span class="card-number">08</span>
+      </div>
+
+      <h3>親子心情卡</h3>
+
+      <p>
+        選擇今天的心情，
+        留下一句想說的話與小小紀錄。
+      </p>
+
+      <button class="card-btn"
+        onclick="comingSoon('親子心情卡')">
+        開始使用
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- FAMILY -->
+
+<section id="family">
+
+  <div class="feature-box">
+
+    <div class="feature-card soft">
+
+      <div style="font-size:42px;margin-bottom:12px;">
+        🌼🐰🎀
+      </div>
+
+      <h3>我們家的小小天地</h3>
+
+      <p>
+        這裡不只是任務工具，
+        之後也可以加入家庭照片、
+        每月小回憶、成長紀錄與親子約定。
+      </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+      <h3>🌷 可以慢慢加入</h3>
+
+      <p>
+        我們會一個功能一個功能完成，
+        不需要一次把所有東西都做完。
+      </p>
+
+      <div class="stickers">
+
+        <div class="sticker">⭐ 星星累積</div>
+        <div class="sticker">🎁 自訂獎勵</div>
+        <div class="sticker">📚 閱讀書架</div>
+        <div class="sticker">🎡 活動轉盤</div>
+        <div class="sticker">🏆 成就徽章</div>
+        <div class="sticker">💾 自動保存</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer class="footer">
+
+  <div class="footer-icons">
+    🌷 🌼 🐰 🎀 ✨
+  </div>
+
+  每一天的小進步，都值得好好收藏。
+
+</footer>
+
+</main>
+
+
+<script>
+
+function comingSoon(name){
+
+  alert(
+    "🌷「" + name + "」下一步就會開始製作！"
+  );
+
+}
+
+</script>
+
 </body>
 </html>
