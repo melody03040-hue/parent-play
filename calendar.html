@@ -408,6 +408,91 @@ body{
     font-size:20px;
   }
 }
+  /* ===== 🌷 精緻版可愛裝飾 ===== */
+
+.hero::before{
+  content:"🌸  ✿  🎀  ✧  🌷";
+  position:absolute;
+  top:16px;
+  right:125px;
+  font-size:18px;
+  letter-spacing:7px;
+  opacity:.72;
+  transform:rotate(-3deg);
+  pointer-events:none;
+}
+
+.calendar-panel{
+  position:relative;
+}
+
+.calendar-panel::before{
+  content:"🌷 ✧ 🎀 ✿";
+  position:absolute;
+  top:-16px;
+  left:28px;
+  background:#fffaf7;
+  border:1px solid #eaded9;
+  border-radius:999px;
+  padding:5px 14px;
+  font-size:14px;
+  letter-spacing:5px;
+  box-shadow:0 5px 15px rgba(105,82,74,.06);
+}
+
+.calendar-panel::after{
+  content:"🌸 ✧ 🐰 ✧ 🌷";
+  position:absolute;
+  right:28px;
+  bottom:-17px;
+  background:#fffaf7;
+  border:1px solid #eaded9;
+  border-radius:999px;
+  padding:5px 14px;
+  font-size:14px;
+  letter-spacing:4px;
+  box-shadow:0 5px 15px rgba(105,82,74,.06);
+}
+
+.month-title::before{
+  content:"🎀";
+  margin-right:9px;
+}
+
+.month-title::after{
+  content:"🌸";
+  margin-left:9px;
+}
+
+.day.today::after{
+  content:"♥";
+  position:absolute;
+  top:7px;
+  right:8px;
+  font-size:10px;
+  color:#d99ba5;
+}
+
+@media(max-width:600px){
+  .hero::before{
+    content:"🌸 ✧ 🎀";
+    right:18px;
+    top:12px;
+    font-size:13px;
+  }
+
+  .calendar-panel::before{
+    left:12px;
+    font-size:11px;
+    letter-spacing:2px;
+  }
+
+  .calendar-panel::after{
+    right:12px;
+    font-size:11px;
+    letter-spacing:2px;
+  }
+}
 </style>
 </head>
 
