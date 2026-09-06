@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>親子心情卡｜親子遊戲小站</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  background:
+    linear-gradient(180deg,#fff9f7 0%,#fffdfb 100%);
+  color:#705b58;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 22px;
+  background:rgba(255,250,248,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #f1e4df;
+}
+
+.brand{
+  font-size:18px;
+  font-weight:900;
+}
+
+.home-link{
+  text-decoration:none;
+  color:#8f7270;
+  font-weight:800;
+}
+
+.wrap{
+  width:min(920px,92%);
+  margin:32px auto 60px;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:36px 22px;
+  border-radius:32px;
+  background:
+    linear-gradient(135deg,#fde7ec,#fff3dc,#eee7fa);
+  box-shadow:0 14px 34px rgba(124,88,82,.08);
+}
+
+.hero::before{
+  content:"💗";
+  position:absolute;
+  left:7%;
+  top:17%;
+  font-size:26px;
+  opacity:.65;
+}
+
+.hero::after{
+  content:"🌷";
+  position:absolute;
+  right:7%;
+  bottom:12%;
+  font-size:30px;
+  opacity:.75;
+}
+
+.hero h1{
+  margin:0;
+  font-size:34px;
+  color:#7f6460;
+}
+
+.hero p{
+  margin:12px auto 0;
+  max-width:590px;
+  line-height:1.8;
+  color:#947875;
+}
+
+.panel{
+  margin-top:24px;
+  padding:26px;
+  border-radius:28px;
+  background:#fff;
+  border:1px solid #f3e8e3;
+  box-shadow:0 14px 32px rgba(116,86,80,.08);
+}
+
+.section-title{
+  margin:0 0 18px;
+  font-size:20px;
+  font-weight:900;
+}
+
+.person-tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.person-btn{
+  flex:1;
+  border:none;
+  cursor:pointer;
+  padding:13px 10px;
+  border-radius:16px;
+  font-weight:900;
+  font-size:15px;
+  color:#866b68;
+  background:#fff5f2;
+  border:1px solid #f0ded8;
+}
+
+.person-btn.active{
+  background:linear-gradient(135deg,#f5c4cd,#e1d2f3);
+  color:#fff;
+  border-color:transparent;
+}
+
+.mood-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+
+.mood-btn{
+  border:none;
+  cursor:pointer;
+  min-height:96px;
+  border-radius:20px;
+  background:#fff8f4;
+  border:1px solid #f1e2db;
+  transition:.18s;
+  color:#806a66;
+}
+
+.mood-btn:hover{
+  transform:translateY(-2px);
+}
+
+.mood-btn.active{
+  background:
+    linear-gradient(135deg,#ffe4e8,#fff0d9,#eee7fa);
+  border:2px solid #e6b7c1;
+  box-shadow:0 7px 16px rgba(201,153,169,.18);
+}
+
+.mood-emoji{
+  display:block;
+  font-size:34px;
+  margin-bottom:5px;
+}
+
+.mood-name{
+  font-size:14px;
+  font-weight:900;
+}
+
+.field{
+  margin-top:18px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:8px;
+  font-size:14px;
+  font-weight:900;
+  color:#8c716e;
+}
+
+textarea,
+input{
+  width:100%;
+  border:none;
+  outline:none;
+  border-radius:18px;
+  padding:15px 16px;
+  font-size:16px;
+  background:#fff7f5;
+  border:1px solid #f0ded8;
+  color:#705b58;
+  font-family:inherit;
+}
+
+textarea{
+  min-height:110px;
+  resize:vertical;
+  line-height:1.7;
+}
+
+.save-btn{
+  width:100%;
+  margin-top:20px;
+  border:none;
+  cursor:pointer;
+  border-radius:18px;
+  padding:15px 20px;
+  font-size:17px;
+  font-weight:900;
+  color:white;
+  background:
+    linear-gradient(135deg,#e8a8b5,#cbb7e8);
+  box-shadow:0 8px 18px rgba(209,160,179,.25);
+}
+
+.save-btn:hover{
+  transform:translateY(-1px);
+}
+
+.summary{
+  margin-top:22px;
+  padding:18px;
+  text-align:center;
+  border-radius:22px;
+  background:
+    linear-gradient(135deg,#fff1f4,#fff8e8,#f2ecfb);
+  border:1px dashed #e7cac8;
+}
+
+.summary-icon{
+  font-size:38px;
+}
+
+.summary-title{
+  margin-top:5px;
+  font-weight:900;
+  font-size:18px;
+}
+
+.summary-text{
+  margin-top:6px;
+  color:#987d79;
+  line-height:1.7;
+}
+
+.history{
+  display:grid;
+  gap:14px;
+}
+
+.history-card{
+  padding:18px;
+  border-radius:20px;
+  background:#fff9f6;
+  border:1px solid #f1e4dd;
+}
+
+.history-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.history-mood{
+  font-size:28px;
+}
+
+.history-info{
+  flex:1;
+}
+
+.history-person{
+  font-weight:900;
+  color:#826967;
+}
+
+.history-date{
+  margin-top:3px;
+  font-size:12px;
+  color:#b09893;
+}
+
+.history-message{
+  margin-top:12px;
+  line-height:1.7;
+  color:#806966;
+  white-space:pre-wrap;
+}
+
+.delete-btn{
+  border:none;
+  cursor:pointer;
+  background:#f9e9e6;
+  color:#a77d78;
+  border-radius:12px;
+  padding:7px 10px;
+  font-weight:800;
+}
+
+.empty{
+  text-align:center;
+  padding:22px 10px;
+  color:#ad9490;
+}
+
+.clear-btn{
+  margin-top:16px;
+  border:none;
+  cursor:pointer;
+  border-radius:14px;
+  padding:10px 15px;
+  background:#f8eae7;
+  color:#9d7772;
+  font-weight:900;
+}
+
+@media(max-width:650px){
+  .hero h1{
+    font-size:28px;
+  }
+
+  .mood-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .mood-btn:last-child{
+    grid-column:1 / -1;
+  }
+
+  .history-top{
+    align-items:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">🐰 親子心情卡</div>
+  <a href="index.html" class="home-link">← 回首頁</a>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>💌 今天的心情是什麼？</h1>
+
+    <p>
+      每天留一點時間說說自己的心情，
+      不管是開心、難過、生氣還是緊張，
+      都可以被好好聽見與收藏。
+    </p>
+  </section>
+
+  <section class="panel">
+
+    <h2 class="section-title">🌷 今天是誰的心情？</h2>
+
+    <div class="person-tabs">
+
+      <button
+        class="person-btn active"
+        data-person="孩子"
+        onclick="selectPerson(this)">
+        🐰 孩子
+      </button>
+
+      <button
+        class="person-btn"
+        data-person="家長"
+        onclick="selectPerson(this)">
+        🌼 家長
+      </button>
+
+    </div>
+
+    <h2 class="section-title">💗 選一張心情卡</h2>
+
+    <div class="mood-grid">
+
+      <button
+        class="mood-btn"
+        data-mood="開心"
+        data-emoji="😊"
+        onclick="selectMood(this)">
+        <span class="mood-emoji">😊</span>
+        <span class="mood-name">開心</span>
+      </button>
+
+      <button
+        class="mood-btn"
+        data-mood="平靜"
+        data-emoji="😌"
+        onclick="selectMood(this)">
+        <span class="mood-emoji">😌</span>
+        <span class="mood-name">平靜</span>
+      </button>
+
+      <button
+        class="mood-btn"
+        data-mood="難過"
+        data-emoji="😢"
+        onclick="selectMood(this)">
+        <span class="mood-emoji">😢</span>
+        <span class="mood-name">難過</span>
+      </button>
+
+      <button
+        class="mood-btn"
+        data-mood="生氣"
+        data-emoji="😠"
+        onclick="selectMood(this)">
+        <span class="mood-emoji">😠</span>
+        <span class="mood-name">生氣</span>
+      </button>
+
+      <button
+        class="mood-btn"
+        data-mood="緊張"
+        data-emoji="😣"
+        onclick="selectMood(this)">
+        <span class="mood-emoji">😣</span>
+        <span class="mood-name">緊張</span>
+      </button>
+
+    </div>
+
+    <div class="field">
+      <label for="message">💌 今天想說的話</label>
+
+      <textarea
+        id="message"
+        maxlength="300"
+        placeholder="例如：今天在學校和朋友一起玩，我覺得很開心。">
+      </textarea>
+    </div>
+
+    <button class="save-btn" onclick="saveMood()">
+      🎀 保存今天的心情
+    </button>
+
+    <div id="summary" class="summary">
+
+      <div class="summary-icon">💗</div>
+
+      <div class="summary-title">
+        今天的心情還沒選擇
+      </div>
+
+      <div class="summary-text">
+        選一張最接近現在感受的心情卡吧。
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="panel">
+
+    <h2 class="section-title">📖 我們的心情小日記</h2>
+
+    <div id="history" class="history"></div>
+
+    <button class="clear-btn" onclick="clearAll()">
+      清除全部紀錄
+    </button>
+
+  </section>
+
+</main>
+
+<script>
+const MOOD_KEY = "parentPlayMoodRecords";
+
+let selectedPerson = "孩子";
+let selectedMood = "";
+let selectedEmoji = "";
+
+function selectPerson(button){
+
+  document.querySelectorAll(".person-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+
+  selectedPerson = button.dataset.person;
+}
+
+function selectMood(button){
+
+  document.querySelectorAll(".mood-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+
+  selectedMood = button.dataset.mood;
+  selectedEmoji = button.dataset.emoji;
+
+  updateSummary();
+}
+
+function updateSummary(){
+
+  const summary = document.getElementById("summary");
+
+  if(!selectedMood){
+
+    summary.innerHTML = `
+      <div class="summary-icon">💗</div>
+
+      <div class="summary-title">
+        今天的心情還沒選擇
+      </div>
+
+      <div class="summary-text">
+        選一張最接近現在感受的心情卡吧。
+      </div>
+    `;
+
+    return;
+  }
+
+  summary.innerHTML = `
+    <div class="summary-icon">
+      ${selectedEmoji}
+    </div>
+
+    <div class="summary-title">
+      ${selectedPerson}今天覺得「${selectedMood}」
+    </div>
+
+    <div class="summary-text">
+      謝謝你願意說出自己的感受 💗
+    </div>
+  `;
+}
+
+function getRecords(){
+
+  const data = JSON.parse(
+    localStorage.getItem(MOOD_KEY)
+  );
+
+  return Array.isArray(data) ? data : [];
+}
+
+function saveMood(){
+
+  if(!selectedMood){
+
+    alert("請先選一張心情卡 🌷");
+
+    return;
+  }
+
+  const message =
+    document.getElementById("message")
+      .value
+      .trim();
+
+  const records = getRecords();
+
+  records.unshift({
+    id:Date.now(),
+    person:selectedPerson,
+    mood:selectedMood,
+    emoji:selectedEmoji,
+    message:message,
+    date:new Date().toLocaleString("zh-TW")
+  });
+
+  localStorage.setItem(
+    MOOD_KEY,
+    JSON.stringify(records)
+  );
+
+  document.getElementById("message").value = "";
+
+  document.querySelectorAll(".mood-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  selectedMood = "";
+  selectedEmoji = "";
+
+  updateSummary();
+  renderHistory();
+
+  alert("💗 今天的心情已經保存！");
+}
+
+function renderHistory(){
+
+  const records = getRecords();
+
+  const box =
+    document.getElementById("history");
+
+  if(records.length === 0){
+
+    box.innerHTML = `
+      <div class="empty">
+        還沒有心情紀錄 🌼<br>
+        今天可以先留下第一張心情卡。
+      </div>
+    `;
+
+    return;
+  }
+
+  box.innerHTML =
+    records.map(record => `
+
+      <div class="history-card">
+
+        <div class="history-top">
+
+          <div class="history-mood">
+            ${escapeHtml(record.emoji)}
+          </div>
+
+          <div class="history-info">
+
+            <div class="history-person">
+              ${escapeHtml(record.person)}
+              ・
+              ${escapeHtml(record.mood)}
+            </div>
+
+            <div class="history-date">
+              ${escapeHtml(record.date)}
+            </div>
+
+          </div>
+
+          <button
+            class="delete-btn"
+            onclick="deleteRecord(${record.id})">
+            刪除
+          </button>
+
+        </div>
+
+        ${
+          record.message
+          ? `
+            <div class="history-message">
+              💌 ${escapeHtml(record.message)}
+            </div>
+          `
+          : ""
+        }
+
+      </div>
+
+    `).join("");
+}
+
+function deleteRecord(id){
+
+  const records =
+    getRecords().filter(
+      record => record.id !== id
+    );
+
+  localStorage.setItem(
+    MOOD_KEY,
+    JSON.stringify(records)
+  );
+
+  renderHistory();
+}
+
+function clearAll(){
+
+  const records = getRecords();
+
+  if(records.length === 0){
+    return;
+  }
+
+  if(
+    confirm(
+      "確定要清除全部心情紀錄嗎？"
+    )
+  ){
+
+    localStorage.removeItem(MOOD_KEY);
+
+    renderHistory();
+  }
+}
+
+function escapeHtml(text){
+
+  return String(text ?? "")
+
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+renderHistory();
+</script>
+
+</body>
+</html>
