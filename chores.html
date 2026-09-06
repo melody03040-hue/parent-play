@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>家事抽籤｜親子遊戲小站</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  background:
+    linear-gradient(180deg,#fffaf7 0%,#fffdfb 100%);
+  color:#705b58;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 22px;
+  background:rgba(255,250,247,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #f1e4df;
+}
+
+.brand{
+  font-weight:900;
+  font-size:18px;
+}
+
+.home-link{
+  text-decoration:none;
+  color:#8f7270;
+  font-weight:800;
+}
+
+.wrap{
+  width:min(920px,92%);
+  margin:32px auto 60px;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:34px 22px;
+  border-radius:32px;
+  background:
+    linear-gradient(135deg,#fde7ec,#fff3dc,#eee7fa);
+  box-shadow:0 14px 34px rgba(124,88,82,.08);
+}
+
+.hero::before{
+  content:"✦";
+  position:absolute;
+  left:8%;
+  top:16%;
+  font-size:26px;
+  color:#d4a85f;
+  opacity:.55;
+}
+
+.hero::after{
+  content:"🌷";
+  position:absolute;
+  right:7%;
+  bottom:12%;
+  font-size:30px;
+  opacity:.75;
+}
+
+.hero h1{
+  margin:0;
+  font-size:34px;
+  color:#7f6460;
+}
+
+.hero p{
+  margin:12px auto 0;
+  max-width:560px;
+  line-height:1.8;
+  color:#947875;
+}
+
+.panel{
+  margin-top:24px;
+  padding:26px;
+  border-radius:28px;
+  background:#ffffff;
+  box-shadow:0 14px 32px rgba(116,86,80,.08);
+  border:1px solid #f3e8e3;
+}
+
+.section-title{
+  margin:0 0 16px;
+  font-size:20px;
+  font-weight:900;
+}
+
+.form-row{
+  display:flex;
+  gap:10px;
+}
+
+input{
+  flex:1;
+  border:none;
+  outline:none;
+  border-radius:16px;
+  padding:14px 16px;
+  font-size:16px;
+  background:#fff7f5;
+  border:1px solid #f1dfda;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+  font-weight:900;
+  border-radius:16px;
+  transition:.18s;
+}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+.add-btn{
+  padding:0 20px;
+  background:#efb7c1;
+  color:white;
+}
+
+.chore-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.chore-tag{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#fff7ef;
+  border:1px solid #f3e3d5;
+  padding:10px 12px;
+  border-radius:999px;
+  font-weight:800;
+}
+
+.chore-tag button{
+  background:none;
+  padding:0;
+  font-size:14px;
+  color:#b88b86;
+}
+
+.draw-box{
+  text-align:center;
+  padding:36px 20px;
+}
+
+.draw-label{
+  font-size:14px;
+  color:#ad8d88;
+  font-weight:800;
+}
+
+.result{
+  margin:14px auto 22px;
+  min-height:90px;
+  display:grid;
+  place-items:center;
+  width:min(500px,100%);
+  border-radius:24px;
+  background:
+    linear-gradient(135deg,#fff0f3,#fff8e7,#f3edfc);
+  border:2px dashed #e7c8c7;
+  font-size:30px;
+  font-weight:900;
+  color:#7d6460;
+  padding:20px;
+}
+
+.draw-btn{
+  padding:15px 30px;
+  font-size:18px;
+  color:white;
+  background:linear-gradient(135deg,#e7a7b5,#cbb5e9);
+  box-shadow:0 8px 18px rgba(209,160,179,.25);
+}
+
+.history{
+  display:grid;
+  gap:10px;
+}
+
+.history-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:13px 15px;
+  border-radius:16px;
+  background:#fff9f5;
+  border:1px solid #f2e5de;
+}
+
+.empty{
+  color:#ad9490;
+  text-align:center;
+  padding:18px;
+}
+
+.clear-btn{
+  margin-top:16px;
+  padding:10px 15px;
+  color:#9d7772;
+  background:#f8eae7;
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:28px;
+  }
+
+  .form-row{
+    flex-direction:column;
+  }
+
+  .add-btn{
+    padding:14px;
+  }
+
+  .result{
+    font-size:25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">🐰 家事抽籤</div>
+  <a href="index.html" class="home-link">← 回首頁</a>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>🧹 今天誰來做家事？</h1>
+    <p>
+      把每天的小家事變成抽籤遊戲，
+      讓孩子一起參與、一起完成，做家事也可以很有趣。
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">🌷 家事清單</h2>
+
+    <div class="form-row">
+      <input
+        id="choreInput"
+        type="text"
+        placeholder="例如：收玩具"
+        maxlength="30"
+      >
+      <button class="add-btn" onclick="addChore()">＋ 新增家事</button>
+    </div>
+
+    <div id="choreList" class="chore-list"></div>
+  </section>
+
+  <section class="panel draw-box">
+    <div class="draw-label">今天抽到的是</div>
+
+    <div id="result" class="result">
+      準備開始抽籤 ✨
+    </div>
+
+    <button class="draw-btn" onclick="drawChore()">
+      🎀 抽一個家事
+    </button>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">📒 最近抽籤紀錄</h2>
+
+    <div id="history" class="history"></div>
+
+    <button class="clear-btn" onclick="clearHistory()">
+      清除紀錄
+    </button>
+  </section>
+
+</main>
+
+<script>
+const CHORE_KEY = "parentPlayChores";
+const HISTORY_KEY = "parentPlayChoreHistory";
+
+const defaultChores = [
+  "收玩具",
+  "擦桌子",
+  "整理書包",
+  "澆花",
+  "摺衣服",
+  "整理自己的房間"
+];
+
+let chores = JSON.parse(localStorage.getItem(CHORE_KEY));
+
+if(!Array.isArray(chores) || chores.length === 0){
+  chores = [...defaultChores];
+  saveChores();
+}
+
+function saveChores(){
+  localStorage.setItem(CHORE_KEY,JSON.stringify(chores));
+}
+
+function renderChores(){
+  const box = document.getElementById("choreList");
+  box.innerHTML = "";
+
+  chores.forEach((chore,index)=>{
+    const item = document.createElement("div");
+    item.className = "chore-tag";
+
+    item.innerHTML = `
+      <span>${escapeHtml(chore)}</span>
+      <button onclick="deleteChore(${index})">✕</button>
+    `;
+
+    box.appendChild(item);
+  });
+}
+
+function addChore(){
+  const input = document.getElementById("choreInput");
+  const value = input.value.trim();
+
+  if(!value) return;
+
+  chores.push(value);
+  saveChores();
+  renderChores();
+
+  input.value = "";
+  input.focus();
+}
+
+function deleteChore(index){
+  chores.splice(index,1);
+  saveChores();
+  renderChores();
+}
+
+function drawChore(){
+  if(chores.length === 0){
+    document.getElementById("result").textContent =
+      "請先新增家事項目 🌷";
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * chores.length);
+  const picked = chores[randomIndex];
+
+  document.getElementById("result").textContent =
+    "🧹 " + picked;
+
+  addHistory(picked);
+}
+
+function addHistory(chore){
+  const history = getHistory();
+
+  history.unshift({
+    chore,
+    time:new Date().toLocaleString("zh-TW")
+  });
+
+  if(history.length > 10){
+    history.length = 10;
+  }
+
+  localStorage.setItem(HISTORY_KEY,JSON.stringify(history));
+  renderHistory();
+}
+
+function getHistory(){
+  const data = JSON.parse(localStorage.getItem(HISTORY_KEY));
+  return Array.isArray(data) ? data : [];
+}
+
+function renderHistory(){
+  const history = getHistory();
+  const box = document.getElementById("history");
+
+  if(history.length === 0){
+    box.innerHTML =
+      `<div class="empty">還沒有抽籤紀錄 🌼</div>`;
+    return;
+  }
+
+  box.innerHTML = history.map(item=>`
+    <div class="history-item">
+      <strong>🧹 ${escapeHtml(item.chore)}</strong>
+      <span>${escapeHtml(item.time)}</span>
+    </div>
+  `).join("");
+}
+
+function clearHistory(){
+  localStorage.removeItem(HISTORY_KEY);
+  renderHistory();
+}
+
+function escapeHtml(text){
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+document.getElementById("choreInput")
+  .addEventListener("keydown",function(e){
+    if(e.key === "Enter"){
+      addChore();
+    }
+  });
+
+renderChores();
+renderHistory();
+</script>
+
+</body>
+</html>
