@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>兒童任務表｜親子遊戲小站</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+:root{
+  --ink:#665753;
+  --soft:#97857f;
+  --line:#eaded9;
+  --paper:#fffdfb;
+  --pink:#f9dfe6;
+  --pink-soft:#fff0f4;
+  --cream:#fff8f1;
+  --yellow:#fff0c6;
+  --green:#e4f1df;
+  --blue:#e6eefb;
+  --shadow:0 14px 38px rgba(105,82,74,.10);
+}
+
+body{
+  margin:0;
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 10%, #fff0f3 0 10%, transparent 30%),
+    radial-gradient(circle at 90% 20%, #f1edff 0 10%, transparent 30%),
+    #fffaf7;
+  min-height:100vh;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,250,247,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.brand-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:white;
+  border-radius:15px;
+  border:1px solid var(--line);
+  box-shadow:0 5px 16px rgba(100,80,70,.08);
+  font-size:22px;
+}
+
+.home-link{
+  text-decoration:none;
+  color:#806f69;
+  font-weight:800;
+  font-size:14px;
+  background:white;
+  border:1px solid var(--line);
+  padding:9px 14px;
+  border-radius:999px;
+}
+
+.container{
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+  padding:30px 0 50px;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:32px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,246,243,.92));
+  box-shadow:var(--shadow);
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:190px;
+  height:190px;
+  right:-80px;
+  bottom:-90px;
+  border-radius:50%;
+  background:#eee7ff;
+  opacity:.8;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(30px,5vw,48px);
+}
+
+.hero p{
+  margin:10px 0 0;
+  color:var(--soft);
+  line-height:1.8;
+}
+
+.hero-bunny{
+  font-size:76px;
+}
+
+.stats{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:rgba(255,255,255,.9);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:16px;
+  text-align:center;
+  box-shadow:0 7px 20px rgba(100,80,70,.05);
+}
+
+.stat strong{
+  display:block;
+  font-size:28px;
+  margin-bottom:3px;
+}
+
+.stat span{
+  font-size:13px;
+  color:var(--soft);
+}
+
+.main-grid{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:18px;
+}
+
+.panel{
+  background:rgba(255,255,255,.93);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+
+.panel h2{
+  margin:0 0 16px;
+  font-size:22px;
+}
+
+.label{
+  display:block;
+  margin-bottom:7px;
+  font-size:13px;
+  font-weight:800;
+  color:#806f69;
+}
+
+.input,
+.select{
+  width:100%;
+  border:1px solid #e8dad5;
+  background:#fffdfc;
+  border-radius:16px;
+  padding:13px 14px;
+  font-size:15px;
+  outline:none;
+  color:var(--ink);
+}
+
+.input:focus,
+.select:focus{
+  border-color:#d9b9b4;
+  box-shadow:0 0 0 3px rgba(219,178,177,.13);
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.add-btn{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:13px 16px;
+  font-size:15px;
+  font-weight:900;
+  background:#806d68;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(100,80,70,.14);
+}
+
+.add-btn:hover{
+  opacity:.94;
+}
+
+.tip{
+  margin-top:16px;
+  border-radius:18px;
+  padding:14px;
+  background:#fff7e9;
+  color:#8e765f;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.task-list{
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+}
+
+.task{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:12px;
+  border:1px solid #ebdfdb;
+  background:#fffdfc;
+  border-radius:19px;
+  padding:14px;
+}
+
+.task.done{
+  opacity:.65;
+  background:#faf7f6;
+}
+
+.check{
+  width:27px;
+  height:27px;
+  accent-color:#c9959d;
+  cursor:pointer;
+}
+
+.task-title{
+  font-weight:900;
+  line-height:1.5;
+}
+
+.task.done .task-title{
+  text-decoration:line-through;
+}
+
+.task-meta{
+  margin-top:3px;
+  font-size:12px;
+  color:#a08f89;
+}
+
+.task-actions{
+  display:flex;
+  gap:6px;
+}
+
+.icon-btn{
+  border:0;
+  background:#f7ebe7;
+  color:#816e68;
+  border-radius:12px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.empty{
+  text-align:center;
+  padding:42px 12px;
+  color:#a08f89;
+  border:1px dashed #e7d9d4;
+  border-radius:20px;
+}
+
+.empty-icon{
+  font-size:42px;
+  margin-bottom:8px;
+}
+
+.progress-wrap{
+  margin-top:18px;
+}
+
+.progress-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  color:#8f7c76;
+  margin-bottom:7px;
+}
+
+.progress{
+  height:13px;
+  border-radius:999px;
+  background:#f0e8e5;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#e8b7bf,#e5c99c);
+  border-radius:999px;
+  transition:width .3s ease;
+}
+
+.footer{
+  text-align:center;
+  color:#a08f89;
+  font-size:13px;
+  padding:28px 0 8px;
+}
+
+@media(max-width:760px){
+  .main-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-inner{
+    align-items:flex-start;
+  }
+
+  .hero-bunny{
+    font-size:58px;
+  }
+}
+
+@media(max-width:520px){
+  .container{
+    width:calc(100% - 16px);
+    padding-top:16px;
+  }
+
+  .hero{
+    padding:23px 19px;
+    border-radius:26px;
+  }
+
+  .hero-bunny{
+    display:none;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .panel{
+    padding:18px;
+    border-radius:24px;
+  }
+
+  .task{
+    grid-template-columns:auto 1fr;
+  }
+
+  .task-actions{
+    grid-column:2;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-icon">🐰</div>
+      <span>兒童任務表</span>
+    </div>
+
+    <a class="home-link" href="index.html">← 回首頁</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>⭐ 今天的小任務</h1>
+        <p>
+          把每天要完成的小事情記下來。<br>
+          完成一項，就得到一顆小星星。
+        </p>
+      </div>
+
+      <div class="hero-bunny">🐰✨</div>
+    </div>
+  </section>
+
+  <section class="stats">
+
+    <div class="stat">
+      <strong id="totalCount">0</strong>
+      <span>今日任務</span>
+    </div>
+
+    <div class="stat">
+      <strong id="doneCount">0</strong>
+      <span>已完成</span>
+    </div>
+
+    <div class="stat">
+      <strong id="starCount">0 ⭐</strong>
+      <span>累積星星</span>
+    </div>
+
+  </section>
+
+  <section class="main-grid">
+
+    <div class="panel">
+
+      <h2>🌷 新增任務</h2>
+
+      <div class="field">
+        <label class="label">任務名稱</label>
+        <input
+          id="taskInput"
+          class="input"
+          type="text"
+          maxlength="40"
+          placeholder="例如：整理書包"
+        >
+      </div>
+
+      <div class="field">
+        <label class="label">任務分類</label>
+        <select id="categoryInput" class="select">
+          <option value="生活習慣">🌼 生活習慣</option>
+          <option value="學習">📚 學習</option>
+          <option value="家事">🧹 家事</option>
+          <option value="健康">🌿 健康</option>
+          <option value="其他">✨ 其他</option>
+        </select>
+      </div>
+
+      <button class="add-btn" onclick="addTask()">
+        ＋ 加入今日任務
+      </button>
+
+      <div class="tip">
+        💡 每完成一個任務會得到 1 顆星星。
+        任務與星星會自動保存在這台裝置裡。
+      </div>
+
+    </div>
+
+    <div class="panel">
+
+      <h2>🎀 今日清單</h2>
+
+      <div id="taskList" class="task-list"></div>
+
+      <div class="progress-wrap">
+
+        <div class="progress-row">
+          <span>今日完成進度</span>
+          <span id="progressText">0%</span>
+        </div>
+
+        <div class="progress">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="footer">
+    🌸 每完成一件小事，都是很棒的進步。
+  </div>
+
+</main>
+
+<script>
+const STORAGE_KEY = "parentPlayTasks";
+const STAR_KEY = "parentPlayStars";
+
+let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+let totalStars = Number(localStorage.getItem(STAR_KEY)) || 0;
+
+function saveData(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  localStorage.setItem(STAR_KEY, totalStars);
+}
+
+function addTask(){
+  const input = document.getElementById("taskInput");
+  const category = document.getElementById("categoryInput");
+
+  const title = input.value.trim();
+
+  if(!title){
+    alert("🌷 請先輸入任務名稱");
+    input.focus();
+    return;
+  }
+
+  tasks.push({
+    id: Date.now(),
+    title: title,
+    category: category.value,
+    done: false
+  });
+
+  input.value = "";
+
+  saveData();
+  renderTasks();
+}
+
+function toggleTask(id){
+  const task = tasks.find(t => t.id === id);
+
+  if(!task) return;
+
+  if(!task.done){
+    task.done = true;
+    totalStars += 1;
+  }else{
+    task.done = false;
+    totalStars = Math.max(0, totalStars - 1);
+  }
+
+  saveData();
+  renderTasks();
+}
+
+function deleteTask(id){
+  const task = tasks.find(t => t.id === id);
+
+  if(task && task.done){
+    totalStars = Math.max(0, totalStars - 1);
+  }
+
+  tasks = tasks.filter(t => t.id !== id);
+
+  saveData();
+  renderTasks();
+}
+
+function editTask(id){
+  const task = tasks.find(t => t.id === id);
+
+  if(!task) return;
+
+  const newTitle = prompt("修改任務名稱", task.title);
+
+  if(newTitle === null) return;
+
+  const cleanTitle = newTitle.trim();
+
+  if(!cleanTitle) return;
+
+  task.title = cleanTitle;
+
+  saveData();
+  renderTasks();
+}
+
+function renderTasks(){
+  const list = document.getElementById("taskList");
+
+  if(tasks.length === 0){
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">🐰</div>
+        今天還沒有任務喔！<br>
+        從左邊新增第一個小任務吧。
+      </div>
+    `;
+  }else{
+    list.innerHTML = tasks.map(task => `
+      <div class="task ${task.done ? "done" : ""}">
+
+        <input
+          class="check"
+          type="checkbox"
+          ${task.done ? "checked" : ""}
+          onchange="toggleTask(${task.id})"
+        >
+
+        <div>
+          <div class="task-title">${escapeHtml(task.title)}</div>
+          <div class="task-meta">${escapeHtml(task.category)} ・ 完成 +1 ⭐</div>
+        </div>
+
+        <div class="task-actions">
+          <button class="icon-btn" onclick="editTask(${task.id})">
+            修改
+          </button>
+
+          <button class="icon-btn" onclick="deleteTask(${task.id})">
+            刪除
+          </button>
+        </div>
+
+      </div>
+    `).join("");
+  }
+
+  updateStats();
+}
+
+function updateStats(){
+  const total = tasks.length;
+  const done = tasks.filter(task => task.done).length;
+  const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+
+  document.getElementById("totalCount").textContent = total;
+  document.getElementById("doneCount").textContent = done;
+  document.getElementById("starCount").textContent = totalStars + " ⭐";
+  document.getElementById("progressText").textContent = percent + "%";
+  document.getElementById("progressBar").style.width = percent + "%";
+}
+
+function escapeHtml(text){
+  return text
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+document.getElementById("taskInput").addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    addTask();
+  }
+});
+
+renderTasks();
+</script>
+
+</body>
+</html>
