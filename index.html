@@ -602,6 +602,45 @@ body{
     margin-top:40px;
   }
 }
+/* ===== 首頁主標題・奶油手帳貼紙字 ===== */
+
+.hero-highlight{
+  display:inline-block;
+  position:relative;
+  margin-left:6px;
+  padding:2px 12px 5px;
+  color:#8a6664;
+  font-weight:900;
+  z-index:1;
+}
+
+.hero-highlight::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:1px;
+  height:58%;
+  background:linear-gradient(
+    90deg,
+    #f9dfe5,
+    #fff0d4,
+    #eee5fa
+  );
+  border-radius:14px 18px 13px 17px;
+  transform:rotate(-1deg);
+  z-index:-1;
+  opacity:.9;
+}
+
+.hero-highlight::after{
+  content:"✦";
+  position:absolute;
+  right:-13px;
+  top:-9px;
+  font-size:14px;
+  color:#d3ad67;
+}  
 </style>
 </head>
 
@@ -639,7 +678,7 @@ body{
 
     <h1>
       把每天的日常<br>
-      變成<span>好玩的親子遊戲</span>
+      變成<span class="hero-highlight">好玩的親子遊戲</span>
     </h1>
 
     <p class="hero-desc">
