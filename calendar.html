@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>親子行事曆｜親子遊戲小站</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+:root{
+  --ink:#665753;
+  --soft:#97857f;
+  --line:#eaded9;
+  --pink:#f7dfe6;
+  --blue:#e6eefb;
+  --yellow:#fff0c8;
+  --green:#e4f1df;
+  --purple:#eee8fb;
+  --shadow:0 14px 38px rgba(105,82,74,.10);
+}
+
+body{
+  margin:0;
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 8% 10%, #fff0f3 0 10%, transparent 30%),
+    radial-gradient(circle at 92% 18%, #f1edff 0 10%, transparent 30%),
+    #fffaf7;
+  min-height:100vh;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(255,250,247,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1120px,calc(100% - 28px));
+  margin:auto;
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.brand-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:white;
+  border-radius:15px;
+  border:1px solid var(--line);
+  font-size:22px;
+}
+
+.home-link{
+  text-decoration:none;
+  color:#806f69;
+  font-weight:800;
+  font-size:14px;
+  background:white;
+  border:1px solid var(--line);
+  padding:9px 14px;
+  border-radius:999px;
+}
+
+.container{
+  width:min(1120px,calc(100% - 28px));
+  margin:auto;
+  padding:30px 0 50px;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:30px 32px;
+  background:linear-gradient(145deg,#fff,#fff7f5);
+  box-shadow:var(--shadow);
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:200px;
+  height:200px;
+  right:-75px;
+  bottom:-100px;
+  border-radius:50%;
+  background:#e9e5ff;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(30px,5vw,48px);
+}
+
+.hero p{
+  margin:9px 0 0;
+  line-height:1.8;
+  color:var(--soft);
+}
+
+.hero-art{
+  font-size:72px;
+}
+
+.calendar-panel{
+  margin-top:18px;
+  background:rgba(255,255,255,.94);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+
+.calendar-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.month-title{
+  font-size:25px;
+  font-weight:900;
+}
+
+.month-btn{
+  border:0;
+  background:#f7ebe7;
+  color:#806d68;
+  border-radius:14px;
+  padding:10px 15px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.weekdays,
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+}
+
+.weekday{
+  text-align:center;
+  font-size:13px;
+  font-weight:800;
+  color:#9a8580;
+  padding-bottom:7px;
+}
+
+.day{
+  position:relative;
+  min-height:115px;
+  border:1px solid #ecdfdb;
+  border-radius:18px;
+  padding:9px;
+  background:#fffdfc;
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+.day:hover{
+  transform:translateY(-2px);
+  box-shadow:0 7px 18px rgba(100,80,70,.07);
+}
+
+.day.other{
+  opacity:.35;
+}
+
+.day.today{
+  border:2px solid #d9a8af;
+  background:#fff7f8;
+}
+
+.day-number{
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+
+.today .day-number{
+  color:#c47d88;
+}
+
+.event-chip{
+  display:block;
+  margin-top:4px;
+  padding:5px 7px;
+  border-radius:9px;
+  font-size:11px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.cat-family{background:#fde5eb;}
+.cat-school{background:#e8effc;}
+.cat-health{background:#e6f2e2;}
+.cat-play{background:#fff0c9;}
+.cat-other{background:#eee8fa;}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  place-items:center;
+  background:rgba(70,55,50,.25);
+  padding:18px;
+}
+
+.modal.show{
+  display:grid;
+}
+
+.modal-card{
+  width:min(500px,100%);
+  background:#fffdfb;
+  border-radius:28px;
+  border:1px solid var(--line);
+  box-shadow:0 24px 70px rgba(80,60,55,.18);
+  padding:24px;
+}
+
+.modal-card h2{
+  margin:0 0 5px;
+}
+
+.selected-date{
+  color:#9a8781;
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.label{
+  display:block;
+  margin-bottom:7px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.input,
+.select{
+  width:100%;
+  border:1px solid #e7d9d4;
+  background:white;
+  border-radius:15px;
+  padding:12px 13px;
+  font-size:15px;
+  outline:none;
+}
+
+.modal-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+
+.save-btn,
+.cancel-btn,
+.delete-btn{
+  border:0;
+  border-radius:14px;
+  padding:11px 15px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.save-btn{
+  background:#806d68;
+  color:white;
+}
+
+.cancel-btn{
+  background:#f4ebe8;
+  color:#806d68;
+}
+
+.delete-btn{
+  background:#fff0f0;
+  color:#b47070;
+}
+
+.event-list{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px dashed #e6d8d3;
+}
+
+.event-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  padding:11px;
+  margin-bottom:8px;
+  border-radius:15px;
+  background:#fff8f5;
+  border:1px solid #eee1dc;
+}
+
+.event-item button{
+  border:0;
+  background:#f1e5e1;
+  border-radius:10px;
+  padding:7px 9px;
+  cursor:pointer;
+}
+
+.empty{
+  color:#a08e88;
+  font-size:13px;
+  text-align:center;
+  padding:12px;
+}
+
+.footer{
+  text-align:center;
+  color:#a08f89;
+  font-size:13px;
+  padding:28px 0 8px;
+}
+
+@media(max-width:760px){
+  .hero-art{
+    font-size:55px;
+  }
+
+  .day{
+    min-height:88px;
+  }
+}
+
+@media(max-width:600px){
+  .container{
+    width:calc(100% - 14px);
+    padding-top:16px;
+  }
+
+  .hero{
+    padding:23px 18px;
+  }
+
+  .hero-art{
+    display:none;
+  }
+
+  .calendar-panel{
+    padding:14px 9px;
+  }
+
+  .weekdays,
+  .calendar-grid{
+    gap:4px;
+  }
+
+  .weekday{
+    font-size:11px;
+  }
+
+  .day{
+    min-height:75px;
+    border-radius:12px;
+    padding:6px 4px;
+  }
+
+  .event-chip{
+    font-size:9px;
+    padding:4px;
+  }
+
+  .month-title{
+    font-size:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-icon">📅</div>
+      <span>親子行事曆</span>
+    </div>
+
+    <a class="home-link" href="index.html">← 回首頁</a>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>📅 我們家的行事曆</h1>
+      <p>
+        課程、活動、家庭約會與重要日期，<br>
+        都可以收藏在這裡。
+      </p>
+    </div>
+
+    <div class="hero-art">🐰🌷</div>
+  </div>
+</section>
+
+<section class="calendar-panel">
+
+  <div class="calendar-head">
+    <button class="month-btn" onclick="changeMonth(-1)">
+      ← 上個月
+    </button>
+
+    <div id="monthTitle" class="month-title"></div>
+
+    <button class="month-btn" onclick="changeMonth(1)">
+      下個月 →
+    </button>
+  </div>
+
+  <div class="weekdays">
+    <div class="weekday">日</div>
+    <div class="weekday">一</div>
+    <div class="weekday">二</div>
+    <div class="weekday">三</div>
+    <div class="weekday">四</div>
+    <div class="weekday">五</div>
+    <div class="weekday">六</div>
+  </div>
+
+  <div id="calendarGrid" class="calendar-grid"></div>
+
+</section>
+
+<div class="footer">
+  🌸 點一下日期，就可以新增當天行程。
+</div>
+
+</main>
+
+<div id="eventModal" class="modal">
+
+  <div class="modal-card">
+
+    <h2>🌷 新增行程</h2>
+    <div id="selectedDateText" class="selected-date"></div>
+
+    <div class="field">
+      <label class="label">行程名稱</label>
+      <input
+        id="eventTitle"
+        class="input"
+        maxlength="40"
+        placeholder="例如：游泳課"
+      >
+    </div>
+
+    <div class="field">
+      <label class="label">活動分類</label>
+      <select id="eventCategory" class="select">
+        <option value="family">🌷 家庭活動</option>
+        <option value="school">📚 學校／課程</option>
+        <option value="health">🌿 健康／運動</option>
+        <option value="play">🎡 遊玩</option>
+        <option value="other">✨ 其他</option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <button class="save-btn" onclick="addEvent()">
+        儲存行程
+      </button>
+
+      <button class="cancel-btn" onclick="closeModal()">
+        取消
+      </button>
+    </div>
+
+    <div class="event-list">
+      <strong>當天行程</strong>
+      <div id="dayEventList"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = "parentPlayCalendarEvents";
+
+let events = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+let currentDate = new Date();
+let selectedDateKey = "";
+
+function saveEvents(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+}
+
+function formatKey(year, month, day){
+  return `${year}-${String(month + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+}
+
+function renderCalendar(){
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  document.getElementById("monthTitle").textContent =
+    `${year} 年 ${month + 1} 月`;
+
+  const firstDay = new Date(year, month, 1);
+  const startDay = firstDay.getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const prevMonthDays = new Date(year, month, 0).getDate();
+
+  const today = new Date();
+  const todayKey = formatKey(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+
+  let html = "";
+
+  for(let i = startDay - 1; i >= 0; i--){
+    const day = prevMonthDays - i;
+    html += `
+      <div class="day other">
+        <div class="day-number">${day}</div>
+      </div>
+    `;
+  }
+
+  for(let day = 1; day <= daysInMonth; day++){
+
+    const key = formatKey(year, month, day);
+    const dayEvents = events.filter(e => e.date === key);
+
+    html += `
+      <div
+        class="day ${key === todayKey ? "today" : ""}"
+        onclick="openModal('${key}')"
+      >
+        <div class="day-number">${day}</div>
+
+        ${dayEvents.slice(0,3).map(event => `
+          <span class="event-chip cat-${event.category}">
+            ${escapeHtml(event.title)}
+          </span>
+        `).join("")}
+
+        ${dayEvents.length > 3
+          ? `<span class="event-chip">＋${dayEvents.length - 3} 筆</span>`
+          : ""
+        }
+
+      </div>
+    `;
+  }
+
+  const totalCells = startDay + daysInMonth;
+  const nextCells = (7 - totalCells % 7) % 7;
+
+  for(let day = 1; day <= nextCells; day++){
+    html += `
+      <div class="day other">
+        <div class="day-number">${day}</div>
+      </div>
+    `;
+  }
+
+  document.getElementById("calendarGrid").innerHTML = html;
+}
+
+function changeMonth(amount){
+  currentDate.setMonth(currentDate.getMonth() + amount);
+  renderCalendar();
+}
+
+function openModal(dateKey){
+  selectedDateKey = dateKey;
+
+  const [year, month, day] = dateKey.split("-");
+
+  document.getElementById("selectedDateText").textContent =
+    `${year} 年 ${Number(month)} 月 ${Number(day)} 日`;
+
+  document.getElementById("eventTitle").value = "";
+
+  renderDayEvents();
+
+  document.getElementById("eventModal").classList.add("show");
+}
+
+function closeModal(){
+  document.getElementById("eventModal").classList.remove("show");
+}
+
+function addEvent(){
+
+  const titleInput = document.getElementById("eventTitle");
+  const categoryInput = document.getElementById("eventCategory");
+
+  const title = titleInput.value.trim();
+
+  if(!title){
+    alert("🌷 請先輸入行程名稱");
+    return;
+  }
+
+  events.push({
+    id: Date.now(),
+    date: selectedDateKey,
+    title,
+    category: categoryInput.value
+  });
+
+  titleInput.value = "";
+
+  saveEvents();
+  renderDayEvents();
+  renderCalendar();
+}
+
+function editEvent(id){
+
+  const event = events.find(e => e.id === id);
+
+  if(!event) return;
+
+  const newTitle = prompt("修改行程名稱", event.title);
+
+  if(newTitle === null) return;
+
+  const cleanTitle = newTitle.trim();
+
+  if(!cleanTitle) return;
+
+  event.title = cleanTitle;
+
+  saveEvents();
+  renderDayEvents();
+  renderCalendar();
+}
+
+function deleteEvent(id){
+
+  const ok = confirm("確定要刪除這筆行程嗎？");
+
+  if(!ok) return;
+
+  events = events.filter(e => e.id !== id);
+
+  saveEvents();
+  renderDayEvents();
+  renderCalendar();
+}
+
+function renderDayEvents(){
+
+  const list = document.getElementById("dayEventList");
+
+  const dayEvents = events.filter(
+    e => e.date === selectedDateKey
+  );
+
+  if(dayEvents.length === 0){
+    list.innerHTML = `
+      <div class="empty">
+        這一天還沒有安排活動喔。
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = dayEvents.map(event => `
+    <div class="event-item">
+
+      <span>
+        ${getCategoryIcon(event.category)}
+        ${escapeHtml(event.title)}
+      </span>
+
+      <div>
+        <button onclick="editEvent(${event.id})">
+          修改
+        </button>
+
+        <button onclick="deleteEvent(${event.id})">
+          刪除
+        </button>
+      </div>
+
+    </div>
+  `).join("");
+}
+
+function getCategoryIcon(category){
+
+  const icons = {
+    family:"🌷",
+    school:"📚",
+    health:"🌿",
+    play:"🎡",
+    other:"✨"
+  };
+
+  return icons[category] || "✨";
+}
+
+function escapeHtml(text){
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+document.getElementById("eventModal").addEventListener(
+  "click",
+  function(e){
+    if(e.target === this){
+      closeModal();
+    }
+  }
+);
+
+renderCalendar();
+</script>
+
+</body>
+</html>
