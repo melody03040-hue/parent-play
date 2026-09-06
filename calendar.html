@@ -418,26 +418,14 @@ body{
 .hero::before{
   content:"";
   position:absolute;
-  width:150px;
-  height:70px;
-  right:155px;
-  top:18px;
+  inset:0;
   z-index:2;
   pointer-events:none;
-  background:
-    radial-gradient(circle at 18% 55%, #f3b8c5 0 5px, transparent 6px),
-    radial-gradient(circle at 24% 45%, #f8ced7 0 5px, transparent 6px),
-    radial-gradient(circle at 24% 65%, #efadbc 0 5px, transparent 6px),
-    radial-gradient(circle at 30% 55%, #f8ced7 0 5px, transparent 6px),
-
-    radial-gradient(ellipse at 48% 48%, #b9cfaa 0 8px, transparent 9px),
-    radial-gradient(ellipse at 58% 65%, #cadbbd 0 8px, transparent 9px),
-
-    radial-gradient(circle at 78% 40%, #e7c4d5 0 4px, transparent 5px),
-    radial-gradient(circle at 84% 32%, #f0d4df 0 4px, transparent 5px),
-    radial-gradient(circle at 84% 48%, #dfb4c9 0 4px, transparent 5px),
-    radial-gradient(circle at 90% 40%, #f0d4df 0 4px, transparent 5px);
-  opacity:.9;
+  background-image:url("calendar-decor.png");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+  opacity:.22;
 }
 
 /* 月曆外框變得更像手帳卡片 */
