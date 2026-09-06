@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>成就徽章｜親子遊戲小站</title>
+
+<style>
+*{box-sizing:border-box}
+
+:root{
+  --ink:#665753;
+  --soft:#97857f;
+  --line:#eaded9;
+  --pink:#f7dfe6;
+  --yellow:#fff0c8;
+  --green:#e5f1e2;
+  --blue:#e9f0fb;
+  --purple:#eee8fb;
+  --shadow:0 16px 42px rgba(105,82,74,.10);
+}
+
+body{
+  margin:0;
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 8%,#fff0f3 0 10%,transparent 30%),
+    radial-gradient(circle at 92% 15%,#f1edff 0 10%,transparent 30%),
+    #fffaf7;
+  min-height:100vh;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,250,247,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.brand-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  font-size:22px;
+}
+
+.home-link{
+  text-decoration:none;
+  color:#806f69;
+  font-weight:800;
+  font-size:14px;
+  background:white;
+  border:1px solid var(--line);
+  padding:9px 14px;
+  border-radius:999px;
+}
+
+.container{
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+  padding:30px 0 50px;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:32px;
+  background:linear-gradient(145deg,#fff,#fff8f5);
+  box-shadow:var(--shadow);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  right:-75px;
+  bottom:-115px;
+  border-radius:50%;
+  background:#fff0c8;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(30px,5vw,48px);
+}
+
+.hero p{
+  margin:10px 0 0;
+  color:var(--soft);
+  line-height:1.8;
+}
+
+.hero-art{
+  font-size:70px;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.stat{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:17px;
+  text-align:center;
+  box-shadow:0 8px 22px rgba(105,82,74,.06);
+}
+
+.stat-number{
+  font-size:26px;
+  font-weight:900;
+}
+
+.stat-label{
+  margin-top:4px;
+  color:var(--soft);
+  font-size:12px;
+  font-weight:700;
+}
+
+.panel{
+  margin-top:18px;
+  background:rgba(255,255,255,.94);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+
+.panel-title{
+  margin:0 0 18px;
+  font-size:23px;
+}
+
+.badge-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.badge{
+  position:relative;
+  border:1px solid #e7dad5;
+  border-radius:24px;
+  padding:22px 16px;
+  text-align:center;
+  background:#fffdfc;
+  min-height:230px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:.2s ease;
+}
+
+.badge.unlocked{
+  background:
+    linear-gradient(145deg,#fffdf8,#fff6dc);
+  box-shadow:0 10px 28px rgba(150,120,60,.11);
+}
+
+.badge.locked{
+  opacity:.55;
+  filter:grayscale(.25);
+}
+
+.badge-icon{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:40px;
+  margin-bottom:13px;
+  background:#f4ece8;
+}
+
+.unlocked .badge-icon{
+  background:#fff0c8;
+  box-shadow:0 0 0 7px rgba(255,240,200,.45);
+}
+
+.badge-title{
+  font-size:18px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+
+.badge-desc{
+  color:#96847e;
+  line-height:1.6;
+  font-size:13px;
+}
+
+.badge-status{
+  margin-top:12px;
+  font-size:12px;
+  font-weight:900;
+  border-radius:999px;
+  padding:7px 11px;
+}
+
+.unlocked .badge-status{
+  background:#fff0c8;
+  color:#8f7140;
+}
+
+.locked .badge-status{
+  background:#f1e9e6;
+  color:#9c8982;
+}
+
+.progress-area{
+  margin-top:22px;
+}
+
+.progress-head{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  margin-bottom:7px;
+  color:#907d77;
+}
+
+.progress-bar{
+  height:11px;
+  background:#efe7e3;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0;
+  background:#d7c47c;
+  border-radius:999px;
+  transition:.4s ease;
+}
+
+.tip{
+  margin-top:18px;
+  padding:15px;
+  border-radius:18px;
+  background:#fff8eb;
+  color:#8f775f;
+  line-height:1.7;
+  font-size:13px;
+}
+
+.footer{
+  text-align:center;
+  color:#a08f89;
+  font-size:13px;
+  padding:28px 0 8px;
+}
+
+@media(max-width:820px){
+  .badge-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:520px){
+  .container{
+    width:calc(100% - 16px);
+    padding-top:16px;
+  }
+
+  .hero{
+    padding:23px 19px;
+  }
+
+  .hero-art{
+    display:none;
+  }
+
+  .summary{
+    gap:7px;
+  }
+
+  .stat{
+    padding:13px 5px;
+  }
+
+  .panel{
+    padding:17px;
+  }
+
+  .badge-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-icon">🏆</div>
+      <span>成就徽章</span>
+    </div>
+
+    <a class="home-link" href="index.html">← 回首頁</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>🏆 我的成就收藏牆</h1>
+        <p>
+          每完成一個小挑戰，<br>
+          就解鎖一枚屬於自己的成就徽章。
+        </p>
+      </div>
+
+      <div class="hero-art">🐰🏅✨</div>
+    </div>
+  </section>
+
+  <section class="summary">
+    <div class="stat">
+      <div id="unlockCount" class="stat-number">0</div>
+      <div class="stat-label">🏅 已解鎖</div>
+    </div>
+
+    <div class="stat">
+      <div id="totalCount" class="stat-number">0</div>
+      <div class="stat-label">🎀 全部徽章</div>
+    </div>
+
+    <div class="stat">
+      <div id="progressPercent" class="stat-number">0%</div>
+      <div class="stat-label">🌷 收藏進度</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="panel-title">✨ 成就徽章</h2>
+
+    <div id="badgeGrid" class="badge-grid"></div>
+
+    <div class="progress-area">
+      <div class="progress-head">
+        <span>徽章收藏進度</span>
+        <strong id="progressText">0 / 0</strong>
+      </div>
+
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 成就會依照你在兒童任務表、獎勵兌換所、閱讀紀錄、親子行事曆和今天做什麼裡的紀錄自動解鎖。
+    </div>
+  </section>
+
+  <div class="footer">
+    🌷 每一個小小完成，都值得被好好收藏。
+  </div>
+
+</main>
+
+<script>
+const TASK_KEY = "parentPlayTasks";
+const STAR_KEY = "parentPlayStars";
+const REWARD_HISTORY_KEY = "parentPlayRewardHistory";
+const READING_KEY = "parentPlayReadingRecords";
+const ACTIVITY_FAVORITE_KEY = "parentPlayActivityFavorites";
+const CALENDAR_KEY = "parentPlayCalendarEvents";
+
+function getStored(key, fallback){
+  try{
+    const value = localStorage.getItem(key);
+
+    if(value === null){
+      return fallback;
+    }
+
+    return JSON.parse(value);
+  }catch{
+    return fallback;
+  }
+}
+
+const tasks = getStored(TASK_KEY, []);
+const rewardHistory = getStored(REWARD_HISTORY_KEY, []);
+const readings = getStored(READING_KEY, []);
+const activityFavorites = getStored(ACTIVITY_FAVORITE_KEY, []);
+const calendarEvents = getStored(CALENDAR_KEY, {});
+
+const completedTasks = Array.isArray(tasks)
+  ? tasks.filter(task =>
+      task.completed === true ||
+      task.done === true
+    ).length
+  : 0;
+
+const redeemedRewards = Array.isArray(rewardHistory)
+  ? rewardHistory.length
+  : 0;
+
+const readingCount = Array.isArray(readings)
+  ? readings.length
+  : 0;
+
+const favoriteActivityCount = Array.isArray(activityFavorites)
+  ? activityFavorites.length
+  : 0;
+
+let calendarEventCount = 0;
+
+if(Array.isArray(calendarEvents)){
+  calendarEventCount = calendarEvents.length;
+}else if(calendarEvents && typeof calendarEvents === "object"){
+  calendarEventCount = Object.values(calendarEvents).reduce(
+    (total,value)=>{
+      if(Array.isArray(value)){
+        return total + value.length;
+      }
+      return total;
+    },
+    0
+  );
+}
+
+const badges = [
+  {
+    icon:"⭐",
+    title:"任務小達人",
+    desc:"完成 1 個兒童任務",
+    unlocked:completedTasks >= 1
+  },
+  {
+    icon:"🌟",
+    title:"任務高手",
+    desc:"累積完成 5 個兒童任務",
+    unlocked:completedTasks >= 5
+  },
+  {
+    icon:"🎁",
+    title:"第一次兌換",
+    desc:"完成 1 次獎勵兌換",
+    unlocked:redeemedRewards >= 1
+  },
+  {
+    icon:"📚",
+    title:"閱讀新星",
+    desc:"新增 1 本閱讀紀錄",
+    unlocked:readingCount >= 1
+  },
+  {
+    icon:"📖",
+    title:"小小書蟲",
+    desc:"累積 3 本閱讀紀錄",
+    unlocked:readingCount >= 3
+  },
+  {
+    icon:"🌸",
+    title:"活動收藏家",
+    desc:"收藏 3 個親子活動",
+    unlocked:favoriteActivityCount >= 3
+  },
+  {
+    icon:"📅",
+    title:"行程規劃家",
+    desc:"建立 3 個行事曆活動",
+    unlocked:calendarEventCount >= 3
+  },
+  {
+    icon:"🏆",
+    title:"全能小玩家",
+    desc:"至少解鎖 5 枚其他徽章",
+    special:true
+  }
+];
+
+const normalUnlocked =
+  badges.filter(badge => !badge.special && badge.unlocked).length;
+
+badges.forEach(badge=>{
+  if(badge.special){
+    badge.unlocked = normalUnlocked >= 5;
+  }
+});
+
+function renderBadges(){
+  const grid = document.getElementById("badgeGrid");
+
+  grid.innerHTML = badges.map(badge=>`
+    <div class="badge ${badge.unlocked ? "unlocked" : "locked"}">
+
+      <div class="badge-icon">
+        ${badge.unlocked ? badge.icon : "🔒"}
+      </div>
+
+      <div class="badge-title">
+        ${badge.title}
+      </div>
+
+      <div class="badge-desc">
+        ${badge.desc}
+      </div>
+
+      <div class="badge-status">
+        ${badge.unlocked ? "✨ 已解鎖" : "尚未解鎖"}
+      </div>
+
+    </div>
+  `).join("");
+
+  const unlocked = badges.filter(badge => badge.unlocked).length;
+  const total = badges.length;
+  const percent = total
+    ? Math.round((unlocked / total) * 100)
+    : 0;
+
+  document.getElementById("unlockCount").textContent = unlocked;
+  document.getElementById("totalCount").textContent = total;
+  document.getElementById("progressPercent").textContent = percent + "%";
+  document.getElementById("progressText").textContent =
+    unlocked + " / " + total;
+
+  document.getElementById("progressFill").style.width =
+    percent + "%";
+}
+
+renderBadges();
+</script>
+
+</body>
+</html>
