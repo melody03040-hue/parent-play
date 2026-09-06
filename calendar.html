@@ -439,52 +439,27 @@ body{
     inset 0 0 0 5px rgba(255,248,246,.7);
 }
 
-/* 左上角小花貼紙 */
+
+
+/* ===== 月曆精緻水彩花邊 ===== */
+
 .calendar-panel::before{
   content:"";
   position:absolute;
-  width:92px;
-  height:48px;
-  left:28px;
-  top:-21px;
-  z-index:3;
-  border-radius:50%;
+  inset:0;
+  z-index:0;
   pointer-events:none;
-
-  background:
-    radial-gradient(circle at 22% 50%, #efb5c1 0 5px, transparent 6px),
-    radial-gradient(circle at 29% 38%, #f8d1d9 0 5px, transparent 6px),
-    radial-gradient(circle at 29% 62%, #f4c2cc 0 5px, transparent 6px),
-    radial-gradient(circle at 36% 50%, #f8d1d9 0 5px, transparent 6px),
-
-    radial-gradient(ellipse at 55% 48%, #b9cdaa 0 8px, transparent 9px),
-    radial-gradient(ellipse at 68% 62%, #cad9bd 0 7px, transparent 8px),
-
-    radial-gradient(circle at 82% 40%, #e9c8d6 0 3px, transparent 4px),
-    radial-gradient(circle at 88% 52%, #f1d7e0 0 3px, transparent 4px);
+  border-radius:28px;
+  background-image:url("calendar-decor.png");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:100% 100%;
+  opacity:.10;
 }
 
-/* 右下角花枝 */
-.calendar-panel::after{
-  content:"";
-  position:absolute;
-  width:120px;
-  height:65px;
-  right:20px;
-  bottom:-20px;
-  pointer-events:none;
-
-  background:
-    radial-gradient(ellipse at 20% 50%, #c4d5b8 0 9px, transparent 10px),
-    radial-gradient(ellipse at 36% 67%, #b6cba7 0 8px, transparent 9px),
-
-    radial-gradient(circle at 58% 48%, #f3bdc8 0 5px, transparent 6px),
-    radial-gradient(circle at 65% 36%, #f9d4dc 0 5px, transparent 6px),
-    radial-gradient(circle at 65% 60%, #efb2c0 0 5px, transparent 6px),
-    radial-gradient(circle at 72% 48%, #f9d4dc 0 5px, transparent 6px),
-
-    radial-gradient(circle at 90% 25%, #d9bd8d 0 2px, transparent 3px),
-    radial-gradient(circle at 96% 45%, #d9bd8d 0 2px, transparent 3px);
+.calendar-panel > *{
+  position:relative;
+  z-index:1;
 }
 
 /* 月份標題 */
