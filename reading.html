@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>閱讀紀錄｜親子遊戲小站</title>
+
+<style>
+*{box-sizing:border-box}
+
+:root{
+  --ink:#665753;
+  --soft:#97857f;
+  --line:#eaded9;
+  --pink:#f7dfe6;
+  --green:#e5f1e2;
+  --yellow:#fff0c8;
+  --blue:#e9f0fb;
+  --shadow:0 16px 42px rgba(105,82,74,.10);
+}
+
+body{
+  margin:0;
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 8%,#fff0f3 0 10%,transparent 30%),
+    radial-gradient(circle at 92% 15%,#eef3ff 0 10%,transparent 30%),
+    #fffaf7;
+  min-height:100vh;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,250,247,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.brand-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  font-size:22px;
+}
+
+.home-link{
+  text-decoration:none;
+  color:#806f69;
+  font-weight:800;
+  font-size:14px;
+  background:white;
+  border:1px solid var(--line);
+  padding:9px 14px;
+  border-radius:999px;
+}
+
+.container{
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+  padding:30px 0 50px;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:32px;
+  background:linear-gradient(145deg,#fff,#fff8f5);
+  box-shadow:var(--shadow);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:210px;
+  height:210px;
+  right:-70px;
+  bottom:-110px;
+  border-radius:50%;
+  background:#e8f0e4;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(30px,5vw,48px);
+}
+
+.hero p{
+  color:var(--soft);
+  line-height:1.8;
+  margin:10px 0 0;
+}
+
+.hero-art{font-size:70px}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.stat{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:17px;
+  text-align:center;
+  box-shadow:0 8px 22px rgba(105,82,74,.06);
+}
+
+.stat-number{
+  font-size:26px;
+  font-weight:900;
+}
+
+.stat-label{
+  margin-top:4px;
+  font-size:12px;
+  color:var(--soft);
+  font-weight:700;
+}
+
+.main-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:18px;
+  margin-top:18px;
+}
+
+.panel{
+  background:rgba(255,255,255,.94);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:23px;
+  box-shadow:var(--shadow);
+}
+
+.panel h2{
+  margin:0 0 18px;
+  font-size:22px;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+label{
+  display:block;
+  margin-bottom:7px;
+  font-size:13px;
+  font-weight:800;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #e6d9d5;
+  border-radius:14px;
+  padding:12px 13px;
+  background:#fffdfc;
+  color:var(--ink);
+  font:inherit;
+  outline:none;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#d7aaa5;
+  box-shadow:0 0 0 3px rgba(215,170,165,.13);
+}
+
+.save-btn{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:13px;
+  background:#806d68;
+  color:white;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.book-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.book-card{
+  border:1px solid #e8dcd7;
+  background:#fffdfc;
+  border-radius:20px;
+  padding:16px;
+}
+
+.book-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.book-title{
+  font-size:18px;
+  font-weight:900;
+  line-height:1.5;
+}
+
+.book-date{
+  color:#a08d87;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.stars{
+  color:#d7a647;
+  letter-spacing:2px;
+  margin-top:8px;
+}
+
+.progress-wrap{
+  margin-top:12px;
+}
+
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  color:#95827c;
+  font-size:12px;
+  margin-bottom:6px;
+}
+
+.progress-bar{
+  height:9px;
+  background:#f1e8e4;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  background:#c9dcbf;
+  border-radius:999px;
+}
+
+.note{
+  margin-top:12px;
+  padding:11px 12px;
+  background:#fff7e8;
+  border-radius:13px;
+  line-height:1.7;
+  font-size:13px;
+}
+
+.card-actions{
+  display:flex;
+  gap:7px;
+  margin-top:13px;
+}
+
+.small-btn{
+  border:0;
+  border-radius:11px;
+  padding:8px 11px;
+  font-weight:800;
+  cursor:pointer;
+  color:#806d68;
+  background:#f6ebe7;
+}
+
+.delete-btn{
+  background:#f9e7e8;
+  color:#a56f73;
+}
+
+.empty{
+  text-align:center;
+  padding:45px 15px;
+  border:1px dashed #e6d8d3;
+  border-radius:20px;
+  color:#a08e88;
+}
+
+.empty-icon{
+  font-size:42px;
+  margin-bottom:9px;
+}
+
+.footer{
+  text-align:center;
+  color:#a08f89;
+  font-size:13px;
+  padding:28px 0 8px;
+}
+
+@media(max-width:760px){
+  .main-grid{grid-template-columns:1fr}
+  .hero-art{font-size:52px}
+}
+
+@media(max-width:520px){
+  .container{
+    width:calc(100% - 16px);
+    padding-top:16px;
+  }
+
+  .hero{padding:23px 19px}
+  .hero-art{display:none}
+  .stats{gap:7px}
+  .stat{padding:13px 6px}
+  .panel{padding:17px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-icon">📚</div>
+      <span>閱讀紀錄</span>
+    </div>
+
+    <a class="home-link" href="index.html">← 回首頁</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>📚 我的閱讀小天地</h1>
+        <p>
+          把每一本讀過的書收藏起來，<br>
+          慢慢累積屬於自己的閱讀回憶。
+        </p>
+      </div>
+
+      <div class="hero-art">🐰📖🌷</div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div id="bookCount" class="stat-number">0</div>
+      <div class="stat-label">📖 閱讀紀錄</div>
+    </div>
+
+    <div class="stat">
+      <div id="finishedCount" class="stat-number">0</div>
+      <div class="stat-label">🌷 已讀完</div>
+    </div>
+
+    <div class="stat">
+      <div id="favoriteCount" class="stat-number">0</div>
+      <div class="stat-label">⭐ 五星好書</div>
+    </div>
+  </section>
+
+  <section class="main-grid">
+
+    <div class="panel">
+      <h2 id="formTitle">🌼 新增閱讀紀錄</h2>
+
+      <div class="field">
+        <label>書名</label>
+        <input id="bookTitle" type="text" placeholder="例如：小王子">
+      </div>
+
+      <div class="field">
+        <label>閱讀日期</label>
+        <input id="readDate" type="date">
+      </div>
+
+      <div class="field">
+        <label>閱讀進度</label>
+        <select id="progress">
+          <option value="25">讀了一點點・25%</option>
+          <option value="50">讀到一半・50%</option>
+          <option value="75">快讀完了・75%</option>
+          <option value="100">讀完了・100%</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>喜歡程度</label>
+        <select id="rating">
+          <option value="5">⭐⭐⭐⭐⭐ 超喜歡</option>
+          <option value="4">⭐⭐⭐⭐ 很喜歡</option>
+          <option value="3">⭐⭐⭐ 喜歡</option>
+          <option value="2">⭐⭐ 還可以</option>
+          <option value="1">⭐ 普通</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>我的小心得</label>
+        <textarea id="note" placeholder="最喜歡哪個角色？這本書讓你想到什麼呢？"></textarea>
+      </div>
+
+      <button class="save-btn" onclick="saveBook()">
+        ＋ 儲存閱讀紀錄
+      </button>
+    </div>
+
+    <div class="panel">
+      <h2>🎀 我的閱讀書櫃</h2>
+      <div id="bookList" class="book-list"></div>
+    </div>
+
+  </section>
+
+  <div class="footer">
+    🌷 每讀完一本書，就多收藏一個小小世界。
+  </div>
+
+</main>
+
+<script>
+const STORAGE_KEY = "parentPlayReadingRecords";
+
+let books = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+let editingId = null;
+
+const titleInput = document.getElementById("bookTitle");
+const dateInput = document.getElementById("readDate");
+const progressInput = document.getElementById("progress");
+const ratingInput = document.getElementById("rating");
+const noteInput = document.getElementById("note");
+
+dateInput.value = new Date().toISOString().slice(0,10);
+
+function saveBook(){
+  const title = titleInput.value.trim();
+
+  if(!title){
+    alert("🌷 請先輸入書名");
+    return;
+  }
+
+  const record = {
+    id: editingId || Date.now().toString(),
+    title,
+    date: dateInput.value,
+    progress:Number(progressInput.value),
+    rating:Number(ratingInput.value),
+    note:noteInput.value.trim()
+  };
+
+  if(editingId){
+    books = books.map(book =>
+      book.id === editingId ? record : book
+    );
+  }else{
+    books.unshift(record);
+  }
+
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(books));
+
+  resetForm();
+  render();
+}
+
+function editBook(id){
+  const book = books.find(item => item.id === id);
+  if(!book) return;
+
+  editingId = id;
+
+  titleInput.value = book.title;
+  dateInput.value = book.date;
+  progressInput.value = book.progress;
+  ratingInput.value = book.rating;
+  noteInput.value = book.note;
+
+  document.getElementById("formTitle").textContent = "✏️ 修改閱讀紀錄";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+function deleteBook(id){
+  if(!confirm("要刪除這筆閱讀紀錄嗎？")) return;
+
+  books = books.filter(book => book.id !== id);
+
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(books));
+
+  if(editingId === id){
+    resetForm();
+  }
+
+  render();
+}
+
+function resetForm(){
+  editingId = null;
+
+  titleInput.value = "";
+  dateInput.value = new Date().toISOString().slice(0,10);
+  progressInput.value = "25";
+  ratingInput.value = "5";
+  noteInput.value = "";
+
+  document.getElementById("formTitle").textContent = "🌼 新增閱讀紀錄";
+}
+
+function escapeHtml(text){
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function render(){
+  const list = document.getElementById("bookList");
+
+  document.getElementById("bookCount").textContent = books.length;
+
+  document.getElementById("finishedCount").textContent =
+    books.filter(book => book.progress === 100).length;
+
+  document.getElementById("favoriteCount").textContent =
+    books.filter(book => book.rating === 5).length;
+
+  if(books.length === 0){
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">📚</div>
+        還沒有閱讀紀錄。<br>
+        把今天讀的第一本書放進來吧！
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = books.map(book => `
+    <div class="book-card">
+
+      <div class="book-top">
+        <div>
+          <div class="book-title">
+            📖 ${escapeHtml(book.title)}
+          </div>
+
+          <div class="book-date">
+            ${book.date || "未填日期"}
+          </div>
+        </div>
+      </div>
+
+      <div class="stars">
+        ${"★".repeat(book.rating)}${"☆".repeat(5-book.rating)}
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-text">
+          <span>閱讀進度</span>
+          <strong>${book.progress}%</strong>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"
+            style="width:${book.progress}%">
+          </div>
+        </div>
+      </div>
+
+      ${book.note ? `
+        <div class="note">
+          🌼 ${escapeHtml(book.note)}
+        </div>
+      ` : ""}
+
+      <div class="card-actions">
+        <button class="small-btn"
+          onclick="editBook('${book.id}')">
+          修改
+        </button>
+
+        <button class="small-btn delete-btn"
+          onclick="deleteBook('${book.id}')">
+          刪除
+        </button>
+      </div>
+
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+
+</body>
+</html>
