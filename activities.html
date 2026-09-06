@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>今天做什麼｜親子遊戲小站</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+:root{
+  --ink:#665753;
+  --soft:#97857f;
+  --line:#eaded9;
+  --pink:#f7dfe6;
+  --yellow:#fff0c8;
+  --green:#e4f1df;
+  --blue:#e9f0fb;
+  --purple:#eee8fb;
+  --shadow:0 16px 42px rgba(105,82,74,.10);
+}
+
+body{
+  margin:0;
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 8%, #fff0f3 0 10%, transparent 30%),
+    radial-gradient(circle at 92% 15%, #f1edff 0 10%, transparent 30%),
+    #fffaf7;
+  min-height:100vh;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,250,247,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.brand-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:white;
+  border-radius:15px;
+  border:1px solid var(--line);
+  font-size:22px;
+}
+
+.home-link{
+  text-decoration:none;
+  color:#806f69;
+  font-weight:800;
+  font-size:14px;
+  background:white;
+  border:1px solid var(--line);
+  padding:9px 14px;
+  border-radius:999px;
+}
+
+.container{
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+  padding:30px 0 50px;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:34px;
+  padding:32px;
+  background:linear-gradient(145deg,#fff,#fff7f5);
+  box-shadow:var(--shadow);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:210px;
+  height:210px;
+  right:-70px;
+  bottom:-110px;
+  border-radius:50%;
+  background:#eee8fb;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(30px,5vw,48px);
+}
+
+.hero p{
+  margin:10px 0 0;
+  line-height:1.8;
+  color:var(--soft);
+}
+
+.hero-art{
+  font-size:72px;
+}
+
+.category-row{
+  margin-top:18px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.category-btn{
+  border:1px solid var(--line);
+  background:white;
+  color:#806f69;
+  border-radius:999px;
+  padding:10px 15px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.category-btn.active{
+  background:#806d68;
+  color:white;
+  border-color:#806d68;
+}
+
+.main-grid{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+}
+
+.panel{
+  background:rgba(255,255,255,.94);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+
+.draw-card{
+  min-height:390px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  border:1px solid #eaded9;
+  border-radius:28px;
+  background:
+    linear-gradient(145deg,#fffdfb,#fff7f4);
+  position:relative;
+  overflow:hidden;
+  padding:30px;
+}
+
+.draw-card::before{
+  content:"✦";
+  position:absolute;
+  top:20px;
+  left:24px;
+  color:#d8bb80;
+  font-size:20px;
+}
+
+.draw-card::after{
+  content:"♡";
+  position:absolute;
+  right:24px;
+  bottom:18px;
+  color:#d79aa8;
+  font-size:22px;
+}
+
+.activity-icon{
+  font-size:72px;
+  margin-bottom:14px;
+}
+
+.activity-category{
+  font-size:13px;
+  color:#9a8781;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.activity-title{
+  font-size:clamp(28px,4vw,42px);
+  font-weight:900;
+  line-height:1.45;
+  margin-bottom:10px;
+}
+
+.activity-desc{
+  color:#9a8781;
+  line-height:1.8;
+  max-width:520px;
+}
+
+.action-row{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.draw-btn,
+.fav-btn{
+  border:0;
+  border-radius:16px;
+  padding:13px 18px;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.draw-btn{
+  background:#806d68;
+  color:white;
+}
+
+.fav-btn{
+  background:#fff0c8;
+  color:#806d68;
+}
+
+.side-title{
+  margin:0 0 14px;
+  font-size:22px;
+}
+
+.favorite-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.favorite-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border:1px solid #ebdfdb;
+  background:#fffdfc;
+  border-radius:17px;
+  padding:12px 13px;
+}
+
+.favorite-text{
+  font-weight:800;
+  line-height:1.5;
+}
+
+.remove-btn{
+  border:0;
+  background:#f6ebe7;
+  color:#8a746d;
+  border-radius:11px;
+  padding:7px 9px;
+  cursor:pointer;
+}
+
+.empty{
+  text-align:center;
+  color:#a08e88;
+  padding:36px 12px;
+  border:1px dashed #e6d8d3;
+  border-radius:20px;
+}
+
+.empty-icon{
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+.tip{
+  margin-top:18px;
+  background:#fff8eb;
+  border-radius:18px;
+  padding:14px;
+  color:#8f775f;
+  line-height:1.7;
+  font-size:13px;
+}
+
+.footer{
+  text-align:center;
+  color:#a08f89;
+  font-size:13px;
+  padding:28px 0 8px;
+}
+
+@media(max-width:760px){
+  .main-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-art{
+    font-size:56px;
+  }
+}
+
+@media(max-width:520px){
+  .container{
+    width:calc(100% - 16px);
+    padding-top:16px;
+  }
+
+  .hero{
+    padding:23px 19px;
+  }
+
+  .hero-art{
+    display:none;
+  }
+
+  .panel{
+    padding:17px;
+  }
+
+  .draw-card{
+    min-height:330px;
+    padding:22px 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-icon">🌸</div>
+      <span>今天做什麼</span>
+    </div>
+
+    <a class="home-link" href="index.html">← 回首頁</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>🌸 今天做什麼？</h1>
+        <p>
+          不知道今天要玩什麼嗎？<br>
+          按一下，就幫你抽一個親子小活動。
+        </p>
+      </div>
+
+      <div class="hero-art">🐰🎀✨</div>
+    </div>
+  </section>
+
+  <div class="category-row">
+    <button class="category-btn active" onclick="setCategory('all',this)">全部</button>
+    <button class="category-btn" onclick="setCategory('indoor',this)">🏠 室內</button>
+    <button class="category-btn" onclick="setCategory('outdoor',this)">🌿 戶外</button>
+    <button class="category-btn" onclick="setCategory('creative',this)">🎨 創作</button>
+    <button class="category-btn" onclick="setCategory('quiet',this)">📚 靜態</button>
+  </div>
+
+  <section class="main-grid">
+
+    <div class="panel">
+      <div class="draw-card">
+        <div id="activityIcon" class="activity-icon">🎁</div>
+        <div id="activityCategory" class="activity-category">準備好了嗎？</div>
+        <div id="activityTitle" class="activity-title">今天想做什麼？</div>
+        <div id="activityDesc" class="activity-desc">
+          按下「幫我抽一個」看看今天的小驚喜。
+        </div>
+
+        <div class="action-row">
+          <button class="draw-btn" onclick="drawActivity()">
+            ✨ 幫我抽一個
+          </button>
+
+          <button class="fav-btn" onclick="addFavorite()">
+            ♡ 收藏這個
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2 class="side-title">🎀 我的收藏</h2>
+      <div id="favoriteList" class="favorite-list"></div>
+
+      <div class="tip">
+        💡 收藏喜歡的活動，下次不知道做什麼時，就可以直接從這裡挑。
+      </div>
+    </div>
+
+  </section>
+
+  <div class="footer">
+    🌷 小小的陪伴，也可以變成很美好的回憶。
+  </div>
+
+</main>
+
+<script>
+const FAVORITE_KEY = "parentPlayActivityFavorites";
+
+const activities = [
+  {
+    id:"a1",
+    category:"indoor",
+    categoryName:"🏠 室內活動",
+    icon:"🧩",
+    title:"一起拼拼圖",
+    desc:"選一盒喜歡的拼圖，一起慢慢完成。"
+  },
+  {
+    id:"a2",
+    category:"indoor",
+    categoryName:"🏠 室內活動",
+    icon:"🍪",
+    title:"一起做小點心",
+    desc:"可以做餅乾、三明治或簡單的小甜點。"
+  },
+  {
+    id:"a3",
+    category:"outdoor",
+    categoryName:"🌿 戶外活動",
+    icon:"🚶",
+    title:"散步尋寶",
+    desc:"出去散步，看看誰先找到三種不同顏色的東西。"
+  },
+  {
+    id:"a4",
+    category:"outdoor",
+    categoryName:"🌿 戶外活動",
+    icon:"🌳",
+    title:"公園小冒險",
+    desc:"去附近公園走走，玩溜滑梯或一起觀察植物。"
+  },
+  {
+    id:"a5",
+    category:"creative",
+    categoryName:"🎨 創作活動",
+    icon:"🎨",
+    title:"畫今天的心情",
+    desc:"各畫一張今天的心情，再交換看看彼此畫了什麼。"
+  },
+  {
+    id:"a6",
+    category:"creative",
+    categoryName:"🎨 創作活動",
+    icon:"✂️",
+    title:"做一張小卡片",
+    desc:"用紙、貼紙或彩色筆做一張小卡片送給家人。"
+  },
+  {
+    id:"a7",
+    category:"quiet",
+    categoryName:"📚 靜態活動",
+    icon:"📖",
+    title:"一起讀一本書",
+    desc:"挑一本喜歡的故事書，輪流念或一起看圖片。"
+  },
+  {
+    id:"a8",
+    category:"quiet",
+    categoryName:"📚 靜態活動",
+    icon:"🃏",
+    title:"玩一局桌遊",
+    desc:"選一款簡單桌遊或紙牌遊戲，一起玩一局。"
+  },
+  {
+    id:"a9",
+    category:"indoor",
+    categoryName:"🏠 室內活動",
+    icon:"🎶",
+    title:"客廳音樂時間",
+    desc:"放喜歡的音樂，一起唱歌或隨音樂自由動一動。"
+  },
+  {
+    id:"a10",
+    category:"outdoor",
+    categoryName:"🌿 戶外活動",
+    icon:"📷",
+    title:"拍三張今天的照片",
+    desc:"一起找三個喜歡的畫面，留下今天的小紀錄。"
+  },
+  {
+    id:"a11",
+    category:"creative",
+    categoryName:"🎨 創作活動",
+    icon:"🧱",
+    title:"積木挑戰",
+    desc:"一起用積木蓋一座房子、動物或想像中的城堡。"
+  },
+  {
+    id:"a12",
+    category:"quiet",
+    categoryName:"📚 靜態活動",
+    icon:"💌",
+    title:"說三件開心的事",
+    desc:"輪流分享今天三件覺得開心或感謝的小事。"
+  }
+];
+
+let currentCategory = "all";
+let currentActivity = null;
+let favorites = JSON.parse(localStorage.getItem(FAVORITE_KEY)) || [];
+
+function setCategory(category,button){
+  currentCategory = category;
+
+  document.querySelectorAll(".category-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+}
+
+function drawActivity(){
+  const pool = currentCategory === "all"
+    ? activities
+    : activities.filter(a => a.category === currentCategory);
+
+  if(pool.length === 0) return;
+
+  let next = pool[Math.floor(Math.random() * pool.length)];
+
+  if(pool.length > 1 && currentActivity){
+    while(next.id === currentActivity.id){
+      next = pool[Math.floor(Math.random() * pool.length)];
+    }
+  }
+
+  currentActivity = next;
+
+  document.getElementById("activityIcon").textContent = next.icon;
+  document.getElementById("activityCategory").textContent = next.categoryName;
+  document.getElementById("activityTitle").textContent = next.title;
+  document.getElementById("activityDesc").textContent = next.desc;
+}
+
+function addFavorite(){
+  if(!currentActivity){
+    alert("🌷 先抽一個活動再收藏喔");
+    return;
+  }
+
+  const exists = favorites.some(item => item.id === currentActivity.id);
+
+  if(exists){
+    alert("🎀 這個活動已經收藏過囉");
+    return;
+  }
+
+  favorites.unshift(currentActivity);
+  saveFavorites();
+  renderFavorites();
+}
+
+function removeFavorite(id){
+  favorites = favorites.filter(item => item.id !== id);
+  saveFavorites();
+  renderFavorites();
+}
+
+function saveFavorites(){
+  localStorage.setItem(FAVORITE_KEY, JSON.stringify(favorites));
+}
+
+function renderFavorites(){
+  const list = document.getElementById("favoriteList");
+
+  if(favorites.length === 0){
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">🌷</div>
+        還沒有收藏活動喔。
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = favorites.map(item => `
+    <div class="favorite-item">
+      <div class="favorite-text">
+        ${item.icon} ${escapeHtml(item.title)}
+      </div>
+
+      <button class="remove-btn"
+        onclick="removeFavorite('${item.id}')">
+        刪除
+      </button>
+    </div>
+  `).join("");
+}
+
+function escapeHtml(text){
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+renderFavorites();
+</script>
+
+</body>
+</html>
