@@ -811,6 +811,122 @@ body{
     padding:22px;
   }
 }  
+  /* ===== 第四區・任務卡精緻奶油手帳版 ===== */
+
+.task-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.task{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:13px;
+  padding:15px 16px;
+  border:1px solid rgba(230,210,204,.78);
+  border-radius:21px;
+  background:
+    linear-gradient(135deg,#fffdfb,#fff8f6);
+  box-shadow:0 7px 18px rgba(102,79,72,.05);
+  transition:.18s ease;
+}
+
+.task:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 22px rgba(102,79,72,.07);
+}
+
+/* 完成後的樣子 */
+.task.done{
+  opacity:.72;
+  background:
+    linear-gradient(135deg,#fbf8f7,#f8f3f4);
+}
+
+.task.done::after{
+  content:"✓";
+  position:absolute;
+  right:12px;
+  top:8px;
+  color:#c7a0a8;
+  font-size:11px;
+  font-weight:900;
+  opacity:.55;
+}
+
+/* 左邊勾選框 */
+.check{
+  width:28px;
+  height:28px;
+  cursor:pointer;
+  accent-color:#d49ca8;
+  filter:drop-shadow(0 3px 5px rgba(160,110,125,.10));
+}
+
+/* 任務名稱 */
+.task-title{
+  color:#735e5a;
+  font-weight:900;
+  line-height:1.55;
+}
+
+.task.done .task-title{
+  color:#a28f8b;
+  text-decoration:line-through;
+  text-decoration-color:#d6b7bd;
+}
+
+/* 分類小字 */
+.task-meta{
+  display:inline-block;
+  margin-top:5px;
+  padding:4px 9px;
+  border-radius:999px;
+  background:#fff3ef;
+  color:#a0807a;
+  font-size:11px;
+  font-weight:800;
+}
+
+/* 右側操作區 */
+.task-actions{
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
+
+.task-actions button{
+  min-width:34px;
+  min-height:34px;
+  padding:6px 9px;
+  border:1px solid #eddcd7;
+  border-radius:12px;
+  background:#fff;
+  color:#8f7470;
+  cursor:pointer;
+  font-family:inherit;
+  font-weight:800;
+  box-shadow:0 4px 10px rgba(100,80,75,.04);
+}
+
+.task-actions button:hover{
+  background:#fff6f3;
+  transform:translateY(-1px);
+}
+
+@media(max-width:650px){
+  .task{
+    grid-template-columns:auto 1fr;
+  }
+
+  .task-actions{
+    grid-column:2;
+    justify-content:flex-end;
+  }
+}
 </style>
 </head>
 
