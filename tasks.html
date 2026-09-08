@@ -927,6 +927,59 @@ body{
     justify-content:flex-end;
   }
 }
+  /* ===== 第五區・空白任務狀態 精緻奶油手帳版 ===== */
+
+.empty{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:46px 18px 42px;
+  color:#9a7f79;
+  border:1px dashed #e8d4cf;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,225,232,.45),transparent 24%),
+    radial-gradient(circle at 85% 82%,rgba(232,222,249,.50),transparent 25%),
+    linear-gradient(135deg,#fffdfb,#fff8f5);
+  box-shadow:0 8px 20px rgba(102,79,72,.04);
+  line-height:1.8;
+}
+
+.empty::before{
+  content:"✦  ♡  ✦";
+  position:absolute;
+  top:12px;
+  right:14px;
+  color:#d6b070;
+  font-size:12px;
+  letter-spacing:5px;
+  opacity:.55;
+}
+
+.empty::after{
+  content:"🌷";
+  position:absolute;
+  left:16px;
+  bottom:12px;
+  font-size:18px;
+  opacity:.45;
+}
+
+.empty-icon{
+  position:relative;
+  z-index:1;
+  width:66px;
+  height:66px;
+  margin:0 auto 12px;
+  display:grid;
+  place-items:center;
+  border-radius:22px;
+  background:rgba(255,255,255,.72);
+  font-size:38px;
+  box-shadow:
+    inset 0 0 0 1px rgba(222,194,190,.5),
+    0 6px 14px rgba(112,83,78,.06);
+}
 </style>
 </head>
 
