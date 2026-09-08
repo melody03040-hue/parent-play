@@ -346,6 +346,150 @@ body{
     justify-content:flex-start;
   }
 }
+  /* ===== 獎勵兌換所 Hero・精緻奶油手帳版 ===== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:38px 42px;
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,226,207,.58),transparent 24%),
+    radial-gradient(circle at 88% 80%,rgba(240,224,249,.62),transparent 26%),
+    linear-gradient(135deg,#fffaf5,#fff3df,#f8f0fb);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  left:-55px;
+  bottom:-75px;
+  border-radius:50%;
+  background:rgba(255,255,255,.45);
+}
+
+.hero::after{
+  content:"✦  ☆  ♡";
+  position:absolute;
+  right:30px;
+  top:18px;
+  color:#d8ae70;
+  font-size:15px;
+  letter-spacing:8px;
+  opacity:.65;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.hero-copy{
+  flex:1;
+}
+
+.hero-kicker{
+  margin-bottom:8px;
+  color:#c69aa2;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2.5px;
+}
+
+.hero h1{
+  margin:0;
+  color:#765d5a;
+  font-size:34px;
+  line-height:1.45;
+}
+
+.hero-highlight{
+  position:relative;
+  display:inline-block;
+  margin-left:5px;
+  padding:0 9px 3px;
+  color:#8a6664;
+  z-index:1;
+}
+
+.hero-highlight::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:2px;
+  height:52%;
+  border-radius:12px;
+  background:linear-gradient(
+    90deg,
+    #f9dfe5,
+    #ffedc9,
+    #eee2f7
+  );
+  transform:rotate(-1deg);
+  z-index:-1;
+}
+
+.hero p{
+  margin:12px 0 0;
+  color:#957975;
+  line-height:1.8;
+}
+
+.hero-stickers{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+.hero-stickers span{
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(224,196,192,.55);
+  color:#8d7470;
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 4px 10px rgba(112,83,78,.05);
+}
+
+.hero-art{
+  flex:0 0 auto;
+  min-width:150px;
+  text-align:center;
+  font-size:72px;
+  filter:drop-shadow(0 10px 12px rgba(114,85,80,.10));
+}
+
+@media(max-width:650px){
+  .hero{
+    padding:30px 22px;
+  }
+
+  .hero-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero-stickers{
+    justify-content:center;
+  }
+
+  .hero-art{
+    font-size:64px;
+  }
+}
 </style>
 </head>
 
@@ -365,18 +509,34 @@ body{
 <main class="container">
 
   <section class="hero">
-    <div class="hero-inner">
-      <div>
-        <h1>🎁 小小獎勵兌換所</h1>
-        <p>
-          把每天努力累積的小星星，<br>
-          兌換成自己喜歡的小獎勵。
-        </p>
-      </div>
+  <div class="hero-inner">
 
-      <div class="hero-art">🐰⭐🎁</div>
+    <div class="hero-copy">
+      <div class="hero-kicker">MY LITTLE REWARDS</div>
+
+      <h1>
+        把努力的小星星
+        <span class="hero-highlight">變成小獎勵</span>
+      </h1>
+
+      <p>
+        每一次認真完成任務，都值得被鼓勵。<br>
+        用累積的小星星，兌換喜歡的小獎勵 ⭐
+      </p>
+
+      <div class="hero-stickers">
+        <span>⭐ 努力集星星</span>
+        <span>🎁 選擇小獎勵</span>
+        <span>🎀 開心來兌換</span>
+      </div>
     </div>
-  </section>
+
+    <div class="hero-art">
+      🐰⭐🎁
+    </div>
+
+  </div>
+</section>
 
   <div class="star-card">
     <strong id="starCount">0 ⭐</strong>
