@@ -980,6 +980,43 @@ body{
     inset 0 0 0 1px rgba(222,194,190,.5),
     0 6px 14px rgba(112,83,78,.06);
 }
+  /* ===== 修改／刪除按鈕・精緻版 ===== */
+
+/* 修改按鈕 */
+.edit-btn{
+  border:1px solid #e4d9ef !important;
+  background:linear-gradient(135deg,#faf6ff,#f3ebfb) !important;
+  color:#88749a !important;
+}
+
+.edit-btn::before{
+  content:"✎";
+  margin-right:4px;
+  font-size:12px;
+}
+
+.edit-btn:hover{
+  background:linear-gradient(135deg,#f7efff,#eee2fa) !important;
+  box-shadow:0 5px 12px rgba(157,132,180,.12);
+}
+
+/* 刪除按鈕 */
+.delete-btn{
+  border:1px solid #f0d8dc !important;
+  background:linear-gradient(135deg,#fff8f8,#fff0f2) !important;
+  color:#b17b84 !important;
+}
+
+.delete-btn::before{
+  content:"♡";
+  margin-right:4px;
+  font-size:11px;
+}
+
+.delete-btn:hover{
+  background:linear-gradient(135deg,#fff3f5,#fde7eb) !important;
+  box-shadow:0 5px 12px rgba(190,130,145,.11);
+}
 </style>
 </head>
 
@@ -1244,11 +1281,11 @@ function renderTasks(){
         </div>
 
         <div class="task-actions">
-          <button class="icon-btn" onclick="editTask(${task.id})">
+          <button class="icon-btn edit-btn" onclick="editTask(${task.id})">
             修改
           </button>
 
-          <button class="icon-btn" onclick="deleteTask(${task.id})">
+          <button class="icon-btn delete-btn" onclick="deleteTask(${task.id})">
             刪除
           </button>
         </div>
