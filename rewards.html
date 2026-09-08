@@ -612,6 +612,410 @@ body{
     font-size:28px;
   }
 }
+  /* ===== 第三區・新增獎勵＋我的獎勵清單 精緻版 ===== */
+
+.main-grid{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:.82fr 1.18fr;
+  gap:20px;
+  align-items:start;
+}
+
+.panel{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,.97),
+    rgba(255,249,246,.94)
+  );
+  border:1px solid rgba(231,211,205,.78);
+  border-radius:30px;
+  padding:26px;
+  box-shadow:0 12px 30px rgba(103,79,72,.07);
+}
+
+.panel::before{
+  content:"";
+  position:absolute;
+  width:115px;
+  height:115px;
+  right:-44px;
+  top:-46px;
+  border-radius:50%;
+  background:rgba(248,218,226,.24);
+  pointer-events:none;
+}
+
+.panel h2{
+  position:relative;
+  margin:0 0 20px;
+  color:#765f5b;
+  font-size:20px;
+  font-weight:900;
+}
+
+.field{
+  position:relative;
+  margin-bottom:16px;
+}
+
+.label{
+  display:block;
+  margin-bottom:8px;
+  color:#8c726e;
+  font-size:13px;
+  font-weight:900;
+}
+
+.input{
+  width:100%;
+  min-height:48px;
+  padding:0 15px;
+  border:1px solid #efddd8;
+  border-radius:16px;
+  outline:none;
+  background:#fff9f7;
+  color:#755f5b;
+  font-family:inherit;
+  font-size:15px;
+  transition:.18s;
+}
+
+.input:focus{
+  border-color:#e5b7c0;
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(238,190,201,.15);
+}
+
+.add-btn{
+  width:100%;
+  margin-top:3px;
+  padding:14px 18px;
+  border:none;
+  border-radius:17px;
+  cursor:pointer;
+  color:#fff;
+  font-weight:900;
+  font-size:15px;
+  background:linear-gradient(135deg,#e7a9b5,#d7b8df);
+  box-shadow:0 8px 18px rgba(205,157,175,.22);
+  transition:.18s;
+}
+
+.add-btn:hover{
+  transform:translateY(-1px);
+}
+
+.tip{
+  margin-top:16px;
+  padding:12px 14px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#fff8e8,#fff3f5);
+  border:1px dashed #ead4cc;
+  color:#987e79;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.reward-list{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.history{
+  position:relative;
+  margin-top:22px;
+  padding-top:4px;
+  border-top:1px dashed rgba(226,205,200,.8);
+}
+
+@media(max-width:760px){
+  .main-grid{
+    grid-template-columns:1fr;
+  }
+
+  .panel{
+    padding:22px;
+  }
+}
+  /* ===== 第四區・獎勵卡＋操作按鈕 精緻版 ===== */
+
+.reward{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:14px;
+
+  padding:16px 17px;
+  border:1px solid rgba(230,210,204,.78);
+  border-radius:21px;
+
+  background:
+    linear-gradient(135deg,#fffdfb,#fff8f4);
+
+  box-shadow:0 7px 18px rgba(102,79,72,.05);
+  transition:.18s ease;
+}
+
+.reward:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 22px rgba(102,79,72,.07);
+}
+
+.reward::before{
+  content:"🎁";
+  position:absolute;
+  right:12px;
+  top:9px;
+  font-size:13px;
+  opacity:.18;
+  pointer-events:none;
+}
+
+.reward-title{
+  color:#735e5a;
+  font-weight:900;
+  line-height:1.55;
+}
+
+.reward-cost{
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 9px;
+
+  border-radius:999px;
+  background:linear-gradient(135deg,#fff6df,#fff0e6);
+
+  color:#a0806c;
+  font-size:11px;
+  font-weight:800;
+}
+
+.reward-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.icon-btn{
+  min-height:34px;
+  padding:7px 10px;
+
+  border:1px solid #eadbd6;
+  border-radius:12px;
+
+  background:#fff;
+  color:#8f7470;
+
+  cursor:pointer;
+  font-family:inherit;
+  font-size:12px;
+  font-weight:800;
+
+  box-shadow:0 4px 10px rgba(100,80,75,.04);
+  transition:.18s;
+}
+
+.icon-btn:hover{
+  transform:translateY(-1px);
+}
+
+/* 兌換 */
+.redeem-btn{
+  border-color:#ead9a9;
+  background:linear-gradient(135deg,#fff9df,#fff0c7);
+  color:#9b7d39;
+}
+
+.redeem-btn::before{
+  content:"⭐";
+  margin-right:4px;
+  font-size:11px;
+}
+
+/* 修改 */
+.reward-actions .icon-btn:nth-child(2){
+  border-color:#e3d8ee;
+  background:linear-gradient(135deg,#faf6ff,#f2ebfb);
+  color:#88749a;
+}
+
+.reward-actions .icon-btn:nth-child(2)::before{
+  content:"✎";
+  margin-right:4px;
+  font-size:11px;
+}
+
+/* 刪除 */
+.reward-actions .icon-btn:nth-child(3){
+  border-color:#f0d8dc;
+  background:linear-gradient(135deg,#fff8f8,#fff0f2);
+  color:#b17b84;
+}
+
+.reward-actions .icon-btn:nth-child(3)::before{
+  content:"♡";
+  margin-right:4px;
+  font-size:11px;
+}
+
+@media(max-width:650px){
+  .reward{
+    grid-template-columns:1fr;
+  }
+
+  .reward-actions{
+    justify-content:flex-start;
+  }
+}
+  /* ===== 第五區・空白狀態＋兌換紀錄＋Footer 精緻版 ===== */
+
+/* 空白狀態 */
+.empty{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:42px 16px 38px;
+
+  color:#9a7f79;
+  border:1px dashed #e8d4cf;
+  border-radius:22px;
+
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,225,232,.45),transparent 24%),
+    radial-gradient(circle at 85% 82%,rgba(232,222,249,.50),transparent 25%),
+    linear-gradient(135deg,#fffdfb,#fff8f5);
+
+  box-shadow:0 8px 20px rgba(102,79,72,.04);
+  line-height:1.8;
+}
+
+.empty::before{
+  content:"✦  ♡  ✦";
+  position:absolute;
+  top:12px;
+  right:14px;
+
+  color:#d6b070;
+  font-size:12px;
+  letter-spacing:5px;
+  opacity:.55;
+}
+
+.empty::after{
+  content:"🎀";
+  position:absolute;
+  left:16px;
+  bottom:12px;
+
+  font-size:17px;
+  opacity:.40;
+}
+
+.empty-icon{
+  position:relative;
+  z-index:1;
+
+  width:64px;
+  height:64px;
+  margin:0 auto 12px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:21px;
+  background:rgba(255,255,255,.74);
+
+  font-size:34px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(222,194,190,.5),
+    0 6px 14px rgba(112,83,78,.06);
+}
+
+
+/* ===== 兌換紀錄 ===== */
+
+.history h2{
+  margin-bottom:14px !important;
+}
+
+.history-item{
+  position:relative;
+
+  margin-bottom:9px;
+  padding:13px 15px;
+
+  border:1px solid rgba(235,219,213,.85);
+  border-radius:16px;
+
+  background:
+    linear-gradient(135deg,#fffaf7,#fff6f1);
+
+  color:#8f7872;
+  font-size:13px;
+  line-height:1.7;
+
+  box-shadow:0 5px 12px rgba(102,79,72,.035);
+}
+
+.history-item small{
+  color:#b09b95;
+  font-size:11px;
+}
+
+
+/* ===== Footer・奶油手帳收尾 ===== */
+
+.footer{
+  position:relative;
+
+  width:max-content;
+  max-width:100%;
+
+  margin:30px auto 0;
+  padding:12px 24px;
+
+  text-align:center;
+  color:#9a7c78;
+  font-size:13px;
+  font-weight:800;
+
+  border:1px dashed rgba(224,194,190,.75);
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,248,242,.95),
+      rgba(255,241,245,.90),
+      rgba(247,241,255,.90)
+    );
+
+  box-shadow:0 7px 18px rgba(105,82,74,.05);
+}
+
+.footer::before{
+  content:"✦";
+  margin-right:8px;
+
+  color:#d3ad70;
+  font-size:11px;
+}
+
+.footer::after{
+  content:"♡";
+  margin-left:8px;
+
+  color:#d7a4ae;
+  font-size:12px;
+}
 </style>
 </head>
 
