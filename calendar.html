@@ -710,6 +710,434 @@ body{
     width:280px;
   }
 }
+/* ===== 第二區・月份切換＋月曆本體 精緻版 ===== */
+
+.calendar-panel{
+  margin-top:22px;
+  padding:26px;
+  border-radius:30px;
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(232,215,210,.82);
+  box-shadow:0 14px 34px rgba(103,79,72,.07);
+}
+
+/* 月份控制列 */
+.calendar-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+/* 年月標題 */
+.month-title{
+  padding:9px 22px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#fff8f5,#fffaf0,#f8f2ff);
+  border:1px solid #eaded9;
+  color:#765f5b;
+  font-size:23px;
+  font-weight:900;
+  box-shadow:0 5px 14px rgba(100,80,70,.05);
+}
+
+/* 上個月、下個月 */
+.month-btn{
+  min-width:96px;
+  padding:10px 15px;
+  border:1px solid #eadbd7;
+  border-radius:14px;
+  background:linear-gradient(135deg,#fff8f6,#f8eff6);
+  color:#856d69;
+  font-family:inherit;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 4px 11px rgba(100,80,70,.04);
+  transition:.18s ease;
+}
+
+.month-btn:hover{
+  transform:translateY(-1px);
+  background:linear-gradient(135deg,#fff3f3,#f5eaf6);
+}
+
+/* 星期列 */
+.weekday{
+  padding:8px 0 10px;
+  color:#987d78;
+  font-size:12px;
+  font-weight:900;
+}
+
+/* 星期日 */
+.weekday:first-child{
+  color:#c88c98;
+}
+
+/* 星期六 */
+.weekday:last-child{
+  color:#9a8bb7;
+}
+
+/* 每一天 */
+.day{
+  min-height:115px;
+  padding:9px;
+  border:1px solid rgba(235,220,215,.88);
+  border-radius:17px;
+  background:rgba(255,253,252,.88);
+  box-shadow:
+    0 3px 10px rgba(100,80,70,.025),
+    inset 0 0 0 2px rgba(255,255,255,.55);
+  transition:.18s ease;
+}
+
+.day:hover{
+  transform:translateY(-2px);
+  border-color:#e6cfd0;
+  box-shadow:0 8px 18px rgba(100,80,70,.07);
+}
+
+/* 日期數字 */
+.day-number{
+  color:#806c67;
+  font-size:13px;
+  font-weight:900;
+}
+
+/* 今天 */
+.day.today{
+  border:2px solid #dfa9b4;
+  background:linear-gradient(145deg,#fff3f6,#fffafb);
+  box-shadow:
+    0 7px 18px rgba(214,150,163,.13),
+    inset 0 0 0 3px rgba(255,255,255,.65);
+}
+
+/* 非本月日期 */
+.day.other{
+  opacity:.32;
+}
+
+/* 行程小標籤 */
+.event-chip{
+  margin-top:5px;
+  padding:5px 7px;
+  border-radius:9px;
+  border:1px solid rgba(130,105,95,.05);
+  font-weight:700;
+  box-shadow:0 2px 5px rgba(100,80,70,.025);
+}
+
+/* 手機版 */
+@media(max-width:600px){
+
+  .calendar-panel{
+    padding:14px 9px;
+  }
+
+  .calendar-head{
+    gap:6px;
+  }
+
+  .month-btn{
+    min-width:auto;
+    padding:9px 10px;
+    font-size:11px;
+  }
+
+  .month-title{
+    padding:7px 10px;
+    font-size:18px;
+  }
+
+  .day{
+    min-height:75px;
+    padding:6px 4px;
+    border-radius:12px;
+  }
+}  
+/* ===== 第三區・行程分類馬卡龍標籤 ===== */
+
+.cat-family{
+  background:linear-gradient(135deg,#fde7ed,#fff1f4);
+  color:#a96f7b;
+  border-color:#f2d6dc;
+}
+
+.cat-school{
+  background:linear-gradient(135deg,#eaf0fc,#f3f6ff);
+  color:#7585a7;
+  border-color:#dbe4f6;
+}
+
+.cat-health{
+  background:linear-gradient(135deg,#e8f3e4,#f2f8ef);
+  color:#718b68;
+  border-color:#d8e8d3;
+}
+
+.cat-play{
+  background:linear-gradient(135deg,#fff1cf,#fff7e2);
+  color:#9d8251;
+  border-color:#f2e2b8;
+}
+
+.cat-other{
+  background:linear-gradient(135deg,#efe9fb,#f7f3ff);
+  color:#8474a3;
+  border-color:#e0d8f1;
+}
+  /* ===== 第四區・新增行程視窗 精緻奶油手帳版 ===== */
+
+.modal{
+  background:rgba(78,61,56,.24);
+  backdrop-filter:blur(5px);
+}
+
+.modal-card{
+  position:relative;
+  overflow:hidden;
+
+  width:min(500px,100%);
+  padding:26px;
+
+  border:1px solid rgba(231,211,205,.85);
+  border-radius:30px;
+
+  background:
+    radial-gradient(circle at 92% 8%,rgba(244,224,250,.55),transparent 23%),
+    radial-gradient(circle at 8% 92%,rgba(255,226,232,.45),transparent 22%),
+    linear-gradient(145deg,#fffdfb,#fff8f5);
+
+  box-shadow:0 24px 70px rgba(80,60,55,.17);
+}
+
+.modal-card::before{
+  content:"✦  ♡  ✦";
+  position:absolute;
+  top:14px;
+  right:17px;
+
+  color:#d6ad70;
+  font-size:11px;
+  letter-spacing:5px;
+  opacity:.55;
+}
+
+.modal-card h2{
+  margin:0 0 5px;
+  color:#765f5b;
+  font-size:21px;
+  font-weight:900;
+}
+
+.selected-date{
+  display:inline-block;
+  margin:4px 0 18px;
+  padding:5px 10px;
+
+  border-radius:999px;
+  background:#fff1f4;
+
+  color:#a27c82;
+  font-size:12px;
+  font-weight:800;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+.label{
+  display:block;
+  margin-bottom:8px;
+
+  color:#8c726e;
+  font-size:13px;
+  font-weight:900;
+}
+
+.input,
+.select{
+  width:100%;
+  min-height:47px;
+  padding:0 14px;
+
+  border:1px solid #ecdcd7;
+  border-radius:15px;
+  outline:none;
+
+  background:#fffafa;
+  color:#755f5b;
+
+  font-family:inherit;
+  font-size:14px;
+
+  transition:.18s;
+}
+
+.input:focus,
+.select:focus{
+  border-color:#e5b7c0;
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(238,190,201,.14);
+}
+
+.modal-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:17px;
+}
+
+.save-btn,
+.cancel-btn,
+.delete-btn{
+  min-height:40px;
+  padding:10px 15px;
+
+  border-radius:14px;
+  font-family:inherit;
+  font-weight:900;
+
+  transition:.18s ease;
+}
+
+.save-btn{
+  background:linear-gradient(135deg,#e4a8b5,#cbb9e7);
+  color:white;
+  box-shadow:0 6px 15px rgba(198,154,176,.18);
+}
+
+.save-btn:hover{
+  transform:translateY(-1px);
+}
+
+.cancel-btn{
+  border:1px solid #eadbd6;
+  background:#fff8f5;
+  color:#8b716c;
+}
+
+.delete-btn{
+  border:1px solid #efd6da;
+  background:#fff2f4;
+  color:#b17b84;
+}
+
+/* 當天行程區 */
+.event-list{
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px dashed #e5d4cf;
+}
+
+.event-list > strong{
+  color:#806965;
+  font-size:14px;
+  font-weight:900;
+}
+
+.event-item{
+  margin-top:9px;
+  padding:11px 12px;
+
+  border:1px solid #ecdfda;
+  border-radius:15px;
+
+  background:linear-gradient(135deg,#fffaf7,#fff5f3);
+  color:#806c67;
+
+  box-shadow:0 4px 10px rgba(100,80,70,.035);
+}
+
+.event-item button{
+  border:1px solid #eadbd6;
+  background:#fff;
+
+  color:#8f7470;
+  font-family:inherit;
+  font-size:12px;
+  font-weight:800;
+
+  box-shadow:0 3px 8px rgba(100,80,70,.035);
+}
+
+.event-item button:hover{
+  background:#fff3f2;
+}
+  /* ===== 第五區・空白提示＋Footer 精緻版 ===== */
+
+.empty{
+  position:relative;
+  overflow:hidden;
+  margin-top:10px;
+  padding:18px 14px;
+
+  text-align:center;
+  color:#9a7f79;
+  font-size:13px;
+  line-height:1.7;
+
+  border:1px dashed #e7d4cf;
+  border-radius:17px;
+
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,225,232,.40),transparent 24%),
+    radial-gradient(circle at 85% 82%,rgba(232,222,249,.45),transparent 25%),
+    linear-gradient(135deg,#fffdfb,#fff8f5);
+}
+
+.empty::before{
+  content:"🌷";
+  margin-right:6px;
+  opacity:.6;
+}
+
+/* Footer */
+.footer{
+  position:relative;
+
+  width:max-content;
+  max-width:100%;
+
+  margin:30px auto 0;
+  padding:12px 24px;
+
+  text-align:center;
+  color:#9a7c78;
+  font-size:13px;
+  font-weight:800;
+
+  border:1px dashed rgba(224,194,190,.75);
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,248,242,.95),
+      rgba(255,241,245,.90),
+      rgba(247,241,255,.90)
+    );
+
+  box-shadow:0 7px 18px rgba(105,82,74,.05);
+}
+
+.footer::before{
+  content:"✦";
+  margin-right:8px;
+  color:#d3ad70;
+  font-size:11px;
+}
+
+.footer::after{
+  content:"♡";
+  margin-left:8px;
+  color:#d7a4ae;
+  font-size:12px;
+}
 </style>
 </head>
 
