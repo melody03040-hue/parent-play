@@ -507,6 +507,111 @@ body{
     width:280px;
   }
 }
+  /* ===== 第二區・我的星星 精緻奶油手帳版 ===== */
+
+.star-card{
+  position:relative;
+  overflow:hidden;
+  margin-top:18px;
+  min-height:118px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:20px 28px;
+  text-align:left;
+
+  border:1px solid rgba(230,211,196,.75);
+  border-radius:26px;
+
+  background:
+    radial-gradient(circle at 12% 20%,rgba(255,226,217,.45),transparent 25%),
+    radial-gradient(circle at 88% 80%,rgba(235,225,250,.55),transparent 27%),
+    linear-gradient(135deg,#fffaf2,#fff5df,#faf1ff);
+
+  box-shadow:0 10px 26px rgba(105,82,74,.06);
+}
+
+.star-card::before{
+  content:"✦  ♡  ✦";
+  position:absolute;
+  right:22px;
+  top:13px;
+  color:#d6ad68;
+  font-size:11px;
+  letter-spacing:5px;
+  opacity:.55;
+}
+
+.star-card-icon{
+  width:64px;
+  height:64px;
+  flex:0 0 64px;
+  display:grid;
+  place-items:center;
+
+  border-radius:22px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(230,210,190,.65);
+
+  font-size:34px;
+  filter:drop-shadow(0 5px 8px rgba(173,133,67,.12));
+}
+
+.star-card-info{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+.star-card-kicker{
+  margin-bottom:2px;
+  color:#c49a9e !important;
+  font-size:10px !important;
+  font-weight:900;
+  letter-spacing:1.8px;
+}
+
+.star-card-info strong{
+  margin:0;
+  color:#80645e;
+  font-size:32px;
+  line-height:1.15;
+}
+
+.star-card-text{
+  margin-top:3px;
+  color:#987d77 !important;
+  font-size:13px !important;
+  font-weight:800;
+}
+
+.star-card-decor{
+  position:absolute;
+  right:26px;
+  bottom:14px;
+  font-size:24px;
+  opacity:.48;
+}
+
+@media(max-width:650px){
+  .star-card{
+    justify-content:flex-start;
+    min-height:105px;
+    padding:18px 20px;
+  }
+
+  .star-card-icon{
+    width:56px;
+    height:56px;
+    flex-basis:56px;
+    font-size:30px;
+  }
+
+  .star-card-info strong{
+    font-size:28px;
+  }
+}
 </style>
 </head>
 
@@ -559,10 +664,17 @@ body{
   </div>
 </section>
 
-  <div class="star-card">
+  <section class="star-card">
+  <div class="star-card-icon">⭐</div>
+
+  <div class="star-card-info">
+    <span class="star-card-kicker">MY LITTLE STARS</span>
     <strong id="starCount">0 ⭐</strong>
-    <span>目前可使用星星</span>
+    <span class="star-card-text">目前可使用星星</span>
   </div>
+
+  <div class="star-card-decor">🎀</div>
+</section>
 
   <section class="main-grid">
 
