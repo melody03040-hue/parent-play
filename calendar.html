@@ -571,6 +571,128 @@ body{
     font-size:11px;
   }
 }
+  /* ===== 親子行事曆 Hero・精緻奶油手帳版 ===== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:38px 42px;
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,220,228,.50),transparent 24%),
+    radial-gradient(circle at 88% 80%,rgba(231,220,249,.58),transparent 26%),
+    linear-gradient(135deg,#fffaf7,#fff3ea,#f7effc);
+}
+
+.hero-inner{
+  position:relative;
+  z-index:3;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.hero-copy{
+  flex:1;
+}
+
+.hero-kicker{
+  margin-bottom:8px;
+  color:#c69aa2;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2.5px;
+}
+
+.hero h1{
+  margin:0;
+  color:#765d5a;
+  font-size:34px;
+  line-height:1.45;
+}
+
+.hero-highlight{
+  position:relative;
+  display:inline-block;
+  margin-left:5px;
+  padding:0 9px 3px;
+  color:#8a6664;
+  z-index:1;
+}
+
+.hero-highlight::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:2px;
+  height:52%;
+  border-radius:12px;
+  background:linear-gradient(
+    90deg,
+    #f9dfe5,
+    #fff0d4,
+    #eee5fa
+  );
+  transform:rotate(-1deg);
+  z-index:-1;
+}
+
+.hero p{
+  margin:12px 0 0;
+  color:#957975;
+  line-height:1.8;
+}
+
+.hero-stickers{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+.hero-stickers span{
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(224,196,192,.55);
+  color:#8d7470;
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 4px 10px rgba(112,83,78,.05);
+}
+
+.hero-art{
+  flex:0 0 auto;
+  min-width:150px;
+  text-align:center;
+  font-size:72px;
+  filter:drop-shadow(0 10px 12px rgba(114,85,80,.10));
+}
+
+@media(max-width:650px){
+  .hero{
+    padding:30px 22px;
+  }
+
+  .hero-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero-stickers{
+    justify-content:center;
+  }
+
+  .hero-art{
+    font-size:64px;
+  }
+}
 </style>
 </head>
 
@@ -591,15 +713,31 @@ body{
 
 <section class="hero">
   <div class="hero-inner">
-    <div>
-      <h1>📅 我們家的行事曆</h1>
+
+    <div class="hero-copy">
+      <div class="hero-kicker">OUR FAMILY CALENDAR</div>
+
+      <h1>
+        把重要的日子
+        <span class="hero-highlight">收藏在一起</span>
+      </h1>
+
       <p>
         課程、活動、家庭約會與重要日期，<br>
-        都可以收藏在這裡。
+        都可以好好記錄在這本小小行事曆裡。
       </p>
+
+      <div class="hero-stickers">
+        <span>🌷 家庭約會</span>
+        <span>📚 課程活動</span>
+        <span>⭐ 重要日子</span>
+      </div>
     </div>
 
-    <div class="hero-art">🐰🌷</div>
+    <div class="hero-art">
+      🐰🌷📅
+    </div>
+
   </div>
 </section>
 
