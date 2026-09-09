@@ -352,6 +352,161 @@ textarea:focus{
   .stat{padding:13px 6px}
   .panel{padding:17px}
 }
+  /* ===== 閱讀紀錄 Hero・精緻奶油手帳版 ===== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:38px 42px;
+  border-radius:34px;
+
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,224,213,.52),transparent 24%),
+    radial-gradient(circle at 88% 80%,rgba(226,221,249,.60),transparent 26%),
+    linear-gradient(135deg,#fffaf5,#fff3e6,#f6effc);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  left:-55px;
+  bottom:-75px;
+  border-radius:50%;
+  background:rgba(255,255,255,.45);
+}
+
+.hero::after{
+  content:"✦  📖  ♡";
+  position:absolute;
+  right:30px;
+  top:18px;
+  color:#d4ae70;
+  font-size:14px;
+  letter-spacing:7px;
+  opacity:.58;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.hero-copy{
+  flex:1;
+}
+
+.hero-kicker{
+  margin-bottom:8px;
+  color:#c69aa2;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2.5px;
+}
+
+.hero h1{
+  margin:0;
+  color:#765d5a;
+  font-size:34px;
+  line-height:1.45;
+}
+
+.hero-highlight{
+  position:relative;
+  display:inline-block;
+  margin-left:5px;
+  padding:0 9px 3px;
+  color:#8a6664;
+  z-index:1;
+}
+
+.hero-highlight::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:2px;
+  height:52%;
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f9dfe5,
+      #fff0d4,
+      #e8e4fa
+    );
+
+  transform:rotate(-1deg);
+  z-index:-1;
+}
+
+.hero p{
+  margin:12px 0 0;
+  color:#957975;
+  line-height:1.8;
+}
+
+.hero-stickers{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+.hero-stickers span{
+  padding:7px 12px;
+  border-radius:999px;
+
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(224,196,192,.55);
+
+  color:#8d7470;
+  font-size:12px;
+  font-weight:800;
+
+  box-shadow:0 4px 10px rgba(112,83,78,.05);
+}
+
+.hero-art{
+  flex:0 0 auto;
+  min-width:190px;
+  text-align:center;
+  font-size:72px;
+
+  filter:
+    drop-shadow(0 10px 12px rgba(114,85,80,.10));
+}
+
+/* 手機版 */
+@media(max-width:650px){
+
+  .hero{
+    padding:30px 22px;
+  }
+
+  .hero-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero-stickers{
+    justify-content:center;
+  }
+
+  .hero-art{
+    font-size:64px;
+  }
+}
 </style>
 </head>
 
@@ -371,18 +526,34 @@ textarea:focus{
 <main class="container">
 
   <section class="hero">
-    <div class="hero-inner">
-      <div>
-        <h1>📚 我的閱讀小天地</h1>
-        <p>
-          把每一本讀過的書收藏起來，<br>
-          慢慢累積屬於自己的閱讀回憶。
-        </p>
-      </div>
+  <div class="hero-inner">
 
-      <div class="hero-art">🐰📖🌷</div>
+    <div class="hero-copy">
+      <div class="hero-kicker">MY LITTLE READING LOG</div>
+
+      <h1>
+        把每一本故事
+        <span class="hero-highlight">收藏成閱讀回憶</span>
+      </h1>
+
+      <p>
+        記下讀過的書、閱讀進度與小心得，<br>
+        慢慢累積屬於自己的閱讀小天地。
+      </p>
+
+      <div class="hero-stickers">
+        <span>📚 記錄每本書</span>
+        <span>⭐ 收藏閱讀心得</span>
+        <span>🌷 看見小小進步</span>
+      </div>
     </div>
-  </section>
+
+    <div class="hero-art">
+      🐰📖🌷
+    </div>
+
+  </div>
+</section>
 
   <section class="stats">
     <div class="stat">
