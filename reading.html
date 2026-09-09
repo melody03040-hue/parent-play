@@ -524,6 +524,594 @@ textarea:focus{
     width:280px;
   }
 } 
+  /* ===== 第二區・閱讀統計卡 精緻馬卡龍版 ===== */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+
+.stat{
+  position:relative;
+  overflow:hidden;
+
+  min-height:108px;
+  padding:18px 15px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  border:1px solid rgba(231,211,205,.78);
+  border-radius:23px;
+
+  box-shadow:
+    0 9px 22px rgba(105,82,74,.055),
+    inset 0 0 0 3px rgba(255,255,255,.38);
+}
+
+/* 第一張：閱讀紀錄 */
+.stat:nth-child(1){
+  background:
+    linear-gradient(135deg,#fff0f3,#fff8f5);
+}
+
+/* 第二張：完成本數 */
+.stat:nth-child(2){
+  background:
+    linear-gradient(135deg,#fff5dc,#fffaf0);
+}
+
+/* 第三張：五星書籍 */
+.stat:nth-child(3){
+  background:
+    linear-gradient(135deg,#eee8fb,#f8f4ff);
+}
+
+/* 小裝飾 */
+.stat::before{
+  position:absolute;
+  right:12px;
+  top:9px;
+
+  font-size:14px;
+  opacity:.38;
+}
+
+.stat:nth-child(1)::before{
+  content:"📖";
+}
+
+.stat:nth-child(2)::before{
+  content:"🌷";
+}
+
+.stat:nth-child(3)::before{
+  content:"⭐";
+}
+
+.stat-number{
+  position:relative;
+  color:#765f5b;
+  font-size:29px;
+  font-weight:900;
+  line-height:1.2;
+}
+
+.stat-label{
+  position:relative;
+
+  margin-top:6px;
+
+  color:#927a75;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* 手機版 */
+@media(max-width:600px){
+
+  .stats{
+    gap:7px;
+  }
+
+  .stat{
+    min-height:92px;
+    padding:14px 7px;
+    border-radius:18px;
+  }
+
+  .stat-number{
+    font-size:24px;
+  }
+
+  .stat-label{
+    font-size:11px;
+  }
+
+}
+  /* ===== 第三區・新增閱讀紀錄表單 精緻奶油手帳版 ===== */
+
+.main-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:20px;
+  margin-top:22px;
+  align-items:start;
+}
+
+.panel{
+  position:relative;
+  overflow:hidden;
+
+  padding:25px;
+
+  border:1px solid rgba(231,211,205,.80);
+  border-radius:30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.97),
+      rgba(255,249,246,.94)
+    );
+
+  box-shadow:
+    0 12px 30px rgba(103,79,72,.07);
+}
+
+.panel::before{
+  content:"";
+  position:absolute;
+
+  width:115px;
+  height:115px;
+
+  right:-45px;
+  top:-48px;
+
+  border-radius:50%;
+  background:rgba(248,218,226,.22);
+
+  pointer-events:none;
+}
+
+.panel > *{
+  position:relative;
+  z-index:1;
+}
+
+.panel h2{
+  margin:0 0 20px;
+
+  color:#765f5b;
+  font-size:21px;
+  font-weight:900;
+}
+
+/* 每個輸入欄位 */
+.field{
+  margin-bottom:16px;
+}
+
+label{
+  display:block;
+  margin-bottom:8px;
+
+  color:#8c726e;
+  font-size:13px;
+  font-weight:900;
+}
+
+/* 輸入框 */
+input,
+select,
+textarea{
+  width:100%;
+
+  border:1px solid #ecdcd7;
+  border-radius:15px;
+
+  padding:12px 14px;
+
+  background:#fffafa;
+  color:#755f5b;
+
+  font-family:inherit;
+  font-size:14px;
+
+  outline:none;
+
+  transition:.18s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover{
+  border-color:#e5c9c5;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#e4b5be;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 0 4px rgba(238,190,201,.14);
+}
+
+/* 心得輸入框 */
+textarea{
+  min-height:110px;
+  resize:vertical;
+  line-height:1.7;
+}
+
+/* 儲存閱讀紀錄 */
+.save-btn{
+  width:100%;
+  min-height:47px;
+
+  margin-top:2px;
+  padding:13px 18px;
+
+  border:1px solid #deb5bd;
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e5a9b6,
+      #d8b8df
+    );
+
+  color:#fff;
+
+  font-family:inherit;
+  font-size:14px;
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 7px 17px rgba(198,151,174,.20);
+
+  transition:.18s ease;
+}
+
+.save-btn:hover{
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 10px 21px rgba(198,151,174,.24);
+}
+
+/* 手機版 */
+@media(max-width:760px){
+
+  .main-grid{
+    grid-template-columns:1fr;
+  }
+
+  .panel{
+    padding:19px;
+  }
+}
+  /* ===== 第四區・我的閱讀書櫃 精緻奶油手帳版 ===== */
+
+.book-list{
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+}
+
+/* 每一本書 */
+.book-card{
+  position:relative;
+  overflow:hidden;
+
+  padding:17px 18px;
+
+  border:1px solid rgba(232,214,208,.85);
+  border-radius:21px;
+
+  background:
+    radial-gradient(circle at 94% 10%,rgba(238,227,250,.38),transparent 22%),
+    linear-gradient(135deg,#fffdfb,#fff8f5);
+
+  box-shadow:
+    0 7px 18px rgba(103,79,72,.05);
+
+  transition:.18s ease;
+}
+
+.book-card:hover{
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 10px 23px rgba(103,79,72,.07);
+}
+
+.book-card::after{
+  content:"✦";
+  position:absolute;
+  right:14px;
+  top:11px;
+
+  color:#d5ad69;
+  font-size:11px;
+  opacity:.42;
+}
+
+/* 書名 */
+.book-title{
+  color:#745e5a;
+  font-size:18px;
+  font-weight:900;
+  line-height:1.5;
+}
+
+/* 閱讀日期 */
+.book-date{
+  margin-top:4px;
+
+  color:#aa918b;
+  font-size:11px;
+  font-weight:700;
+}
+
+/* 星星評分 */
+.stars{
+  margin-top:9px;
+
+  color:#d5a34a;
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+/* 閱讀進度 */
+.progress-wrap{
+  margin-top:14px;
+}
+
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+
+  margin-bottom:7px;
+
+  color:#927c76;
+  font-size:11px;
+}
+
+.progress-text strong{
+  color:#806965;
+}
+
+/* 進度條底色 */
+.progress-bar{
+  height:10px;
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(90deg,#f3e8e5,#f2edf6);
+
+  box-shadow:
+    inset 0 1px 3px rgba(105,82,74,.05);
+}
+
+/* 已完成進度 */
+.progress-fill{
+  height:100%;
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #e9b7c0,
+      #ead49f,
+      #cddfbe
+    );
+
+  box-shadow:
+    0 2px 5px rgba(170,150,120,.10);
+}
+
+/* 閱讀小心得 */
+.note{
+  position:relative;
+
+  margin-top:13px;
+  padding:12px 14px;
+
+  border:1px dashed #ead8c5;
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff9e8,
+      #fff6ef
+    );
+
+  color:#8c756e;
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* 修改、刪除 */
+.card-actions{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.small-btn{
+  padding:8px 12px;
+
+  border:1px solid #e4d9ee;
+  border-radius:11px;
+
+  background:
+    linear-gradient(135deg,#faf6ff,#f2ebfb);
+
+  color:#88749a;
+
+  font-family:inherit;
+  font-size:12px;
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:.18s ease;
+}
+
+.small-btn:hover{
+  transform:translateY(-1px);
+}
+
+/* 刪除 */
+.delete-btn{
+  border-color:#efd7db;
+
+  background:
+    linear-gradient(135deg,#fff7f8,#fff0f2);
+
+  color:#b17b84;
+}
+  /* ===== 第五區・空白畫面＋Footer＋手機版修正 ===== */
+
+/* 還沒有閱讀紀錄 */
+.empty{
+  position:relative;
+  overflow:hidden;
+
+  padding:42px 15px;
+
+  text-align:center;
+  color:#9a807a;
+  line-height:1.8;
+
+  border:1px dashed #e7d5d0;
+  border-radius:21px;
+
+  background:
+    radial-gradient(circle at 15% 15%,rgba(255,224,232,.42),transparent 24%),
+    radial-gradient(circle at 88% 84%,rgba(234,225,249,.48),transparent 25%),
+    linear-gradient(135deg,#fffdfb,#fff8f5);
+
+  box-shadow:
+    0 8px 20px rgba(103,79,72,.04);
+}
+
+.empty::before{
+  content:"✦  ♡";
+  position:absolute;
+  top:12px;
+  right:14px;
+
+  color:#d4ad6c;
+  font-size:11px;
+  letter-spacing:5px;
+  opacity:.5;
+}
+
+.empty-icon{
+  width:64px;
+  height:64px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 11px;
+
+  border-radius:21px;
+
+  background:rgba(255,255,255,.72);
+
+  font-size:34px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(226,204,198,.5),
+    0 6px 14px rgba(112,83,78,.05);
+}
+
+
+/* Footer */
+.footer{
+  position:relative;
+
+  width:max-content;
+  max-width:100%;
+
+  margin:30px auto 0;
+  padding:12px 24px;
+
+  text-align:center;
+
+  color:#9a7c78;
+  font-size:13px;
+  font-weight:800;
+
+  border:1px dashed rgba(224,194,190,.75);
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,248,242,.95),
+      rgba(255,241,245,.90),
+      rgba(247,241,255,.90)
+    );
+
+  box-shadow:
+    0 7px 18px rgba(105,82,74,.05);
+}
+
+.footer::before{
+  content:"✦";
+  margin-right:8px;
+
+  color:#d3ad70;
+  font-size:11px;
+}
+
+.footer::after{
+  content:"♡";
+  margin-left:8px;
+
+  color:#d7a4ae;
+  font-size:12px;
+}
+
+
+/* ===== 修正 iPhone Hero 圖片被隱藏 ===== */
+
+@media(max-width:520px){
+
+  .hero-art{
+    display:block;
+    width:100%;
+    min-width:0;
+  }
+
+  .reading-hero-image{
+    display:block;
+    width:260px;
+    max-width:100%;
+    margin:0 auto;
+  }
+
+}
 </style>
 </head>
 
