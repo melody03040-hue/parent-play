@@ -558,6 +558,608 @@ textarea{
     margin:0 auto;
   }
 
+}
+/* ===== 心情選擇區・精緻奶油手帳版 ===== */
+
+.panel{
+  position:relative;
+  overflow:hidden;
+
+  margin-top:22px;
+  padding:26px;
+
+  border:1px solid rgba(232,214,208,.82);
+  border-radius:29px;
+
+  background:
+    radial-gradient(circle at 95% 5%,rgba(244,221,233,.30),transparent 21%),
+    linear-gradient(145deg,#fffefd,#fff9f7);
+
+  box-shadow:
+    0 11px 28px rgba(108,82,75,.065);
+}
+
+.panel::before{
+  content:"♡";
+  position:absolute;
+  right:22px;
+  top:17px;
+
+  color:#e1b5bd;
+  font-size:17px;
+  opacity:.48;
+}
+
+.section-title{
+  position:relative;
+  z-index:1;
+
+  margin:0 0 16px;
+
+  color:#765f5b;
+  font-size:19px;
+  font-weight:900;
+}
+
+/* 第二個標題留一點距離 */
+.mood-grid + .section-title,
+.person-tabs + .section-title{
+  margin-top:25px;
+}
+
+/* ===== 孩子 / 家長 ===== */
+
+.person-tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:26px;
+}
+
+.person-btn{
+  flex:1;
+
+  min-height:48px;
+  padding:11px 18px;
+
+  border:1px solid #eadbd6;
+  border-radius:16px;
+
+  background:#fffaf8;
+  color:#947a75;
+
+  font-family:inherit;
+  font-size:14px;
+  font-weight:900;
+
+  box-shadow:
+    0 4px 10px rgba(108,82,75,.04);
+
+  transition:.18s ease;
+}
+
+.person-btn:hover{
+  transform:translateY(-1px);
+}
+
+/* 被選中的身份 */
+.person-btn.active{
+  border-color:#e4b6c0;
+
+  background:
+    linear-gradient(135deg,#f9dce3,#f4e5f6);
+
+  color:#805f66;
+
+  box-shadow:
+    0 6px 15px rgba(199,151,174,.15);
+}
+
+/* ===== 五張心情卡 ===== */
+
+.mood-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:11px;
+}
+
+.mood-btn{
+  position:relative;
+
+  min-height:105px;
+  padding:15px 8px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+
+  border:1px solid #eaded9;
+  border-radius:21px;
+
+  background:
+    linear-gradient(145deg,#fffefd,#fff8f6);
+
+  color:#806a66;
+
+  font-family:inherit;
+
+  box-shadow:
+    0 6px 14px rgba(108,82,75,.045);
+
+  transition:.18s ease;
+}
+
+.mood-btn:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 9px 18px rgba(108,82,75,.07);
+}
+
+.mood-emoji{
+  font-size:32px;
+  line-height:1;
+}
+
+.mood-name{
+  font-size:13px;
+  font-weight:900;
+}
+
+/* 選中的心情卡 */
+.mood-btn.active{
+  border-color:#e3b3be;
+
+  background:
+    radial-gradient(circle at 50% 10%,rgba(255,255,255,.72),transparent 35%),
+    linear-gradient(145deg,#fbe0e6,#f5e7f7);
+
+  color:#795d63;
+
+  box-shadow:
+    0 8px 18px rgba(199,151,174,.16);
+}
+
+.mood-btn.active::after{
+  content:"♡";
+
+  position:absolute;
+  right:9px;
+  top:7px;
+
+  color:#c98f9c;
+  font-size:12px;
+}
+
+/* ===== 手機 ===== */
+
+@media(max-width:650px){
+
+  .panel{
+    padding:20px;
+  }
+
+  .mood-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .mood-btn{
+    min-height:94px;
+  }
+
+  /* 第五張置中 */
+  .mood-btn:last-child{
+    grid-column:1 / -1;
+  }
+
+}
+
+@media(max-width:420px){
+
+  .person-tabs{
+    gap:8px;
+  }
+
+  .person-btn{
+    padding:10px 8px;
+  }
+
+}
+/* ===== 想說的話＋儲存心情・精緻奶油手帳版 ===== */
+
+/* 心情留言框 */
+textarea{
+  display:block;
+  width:100%;
+  min-height:125px;
+
+  padding:15px 17px;
+
+  border:1px solid #eadbd6;
+  border-radius:18px;
+
+  outline:none;
+  resize:vertical;
+
+  background:
+    linear-gradient(145deg,#fffdfc,#fff8f6);
+
+  color:#765f5b;
+
+  font-family:inherit;
+  font-size:14px;
+  line-height:1.8;
+
+  box-shadow:
+    inset 0 2px 6px rgba(108,82,75,.025);
+
+  transition:.18s ease;
+}
+
+textarea::placeholder{
+  color:#b39b96;
+}
+
+textarea:focus{
+  border-color:#e2b2bd;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 0 4px rgba(238,190,201,.13);
+}
+
+/* 儲存今天心情 */
+.save-btn{
+  display:block;
+
+  width:min(320px,100%);
+  min-height:50px;
+
+  margin:20px auto 0;
+  padding:14px 24px;
+
+  border:1px solid #dcb3bd;
+  border-radius:17px;
+
+  background:
+    linear-gradient(135deg,#e5a8b5,#d7b8df);
+
+  color:#fff;
+
+  font-family:inherit;
+  font-size:15px;
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 8px 18px rgba(199,151,174,.22);
+
+  transition:.18s ease;
+}
+
+.save-btn:hover{
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 11px 22px rgba(199,151,174,.26);
+}
+
+.save-btn:active{
+  transform:translateY(0);
+}
+
+/* 手機 */
+@media(max-width:600px){
+
+  textarea{
+    min-height:115px;
+  }
+
+  .save-btn{
+    width:100%;
+  }
+
+}
+  /* ===== 心情小日記・精緻奶油手帳版 ===== */
+
+.history{
+  display:grid;
+  gap:13px;
+}
+
+/* 每一張心情紀錄卡 */
+.history-card{
+  position:relative;
+  overflow:hidden;
+
+  padding:17px;
+
+  border:1px solid #eadfd9;
+  border-radius:20px;
+
+  background:
+    radial-gradient(circle at 94% 10%,rgba(246,221,230,.30),transparent 24%),
+    linear-gradient(145deg,#fffefd,#fff8f6);
+
+  box-shadow:
+    0 6px 15px rgba(108,82,75,.045);
+}
+
+/* 小裝飾 */
+.history-card::after{
+  content:"♡";
+  position:absolute;
+
+  right:14px;
+  bottom:10px;
+
+  color:#e1b5bd;
+  font-size:13px;
+  opacity:.45;
+}
+
+.history-top{
+  position:relative;
+  z-index:1;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* 心情 Emoji */
+.history-mood{
+  flex:0 0 auto;
+
+  width:48px;
+  height:48px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(145deg,#fff1f4,#f7ecfb);
+
+  font-size:27px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(230,205,211,.55);
+}
+
+.history-info{
+  flex:1;
+  min-width:0;
+}
+
+.history-person{
+  color:#785f5c;
+
+  font-size:14px;
+  font-weight:900;
+}
+
+.history-date{
+  margin-top:4px;
+
+  color:#aa918c;
+
+  font-size:11px;
+}
+
+/* 留言內容 */
+.history-message{
+  position:relative;
+  z-index:1;
+
+  margin-top:13px;
+  padding:12px 14px;
+
+  border:1px solid #eee1dc;
+  border-radius:15px;
+
+  background:rgba(255,250,247,.85);
+
+  color:#806966;
+
+  font-size:13px;
+  line-height:1.8;
+
+  white-space:pre-wrap;
+}
+
+/* 單筆刪除 */
+.delete-btn{
+  flex:0 0 auto;
+
+  padding:7px 11px;
+
+  border:1px solid #ead3d0;
+  border-radius:12px;
+
+  background:#f9ebe8;
+
+  color:#9f7672;
+
+  font-family:inherit;
+  font-size:11px;
+  font-weight:900;
+
+  cursor:pointer;
+
+  transition:.18s ease;
+}
+
+.delete-btn:hover{
+  transform:translateY(-1px);
+
+  background:#f6dfdc;
+}
+
+/* 沒有紀錄時 */
+.empty{
+  padding:24px 16px;
+
+  border:1px dashed #e6d5d1;
+  border-radius:18px;
+
+  background:
+    linear-gradient(145deg,#fffdfb,#fff8f6);
+
+  color:#a28a85;
+
+  text-align:center;
+  font-size:13px;
+  line-height:1.8;
+}
+
+/* 清除全部紀錄 */
+.clear-btn{
+  display:block;
+
+  margin:17px auto 0;
+  padding:10px 16px;
+
+  border:1px solid #ead3d0;
+  border-radius:14px;
+
+  background:
+    linear-gradient(135deg,#f9ece9,#f2e8f1);
+
+  color:#97746f;
+
+  font-family:inherit;
+  font-size:12px;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+/* 手機 */
+@media(max-width:600px){
+
+  .history-card{
+    padding:15px;
+  }
+
+  .history-top{
+    align-items:flex-start;
+  }
+
+  .history-mood{
+    width:44px;
+    height:44px;
+    font-size:25px;
+  }
+
+  .delete-btn{
+    padding:6px 9px;
+  }
+
+  .clear-btn{
+    width:100%;
+  }
+
+}
+/* ===== 今日心情摘要卡・精緻奶油手帳版 ===== */
+
+.summary{
+  position:relative;
+  overflow:hidden;
+
+  margin-top:22px;
+  padding:20px 18px;
+
+  text-align:center;
+
+  border:1px dashed #e4c8cb;
+  border-radius:22px;
+
+  background:
+    radial-gradient(circle at 15% 20%,rgba(255,225,233,.38),transparent 24%),
+    radial-gradient(circle at 88% 82%,rgba(231,222,248,.38),transparent 25%),
+    linear-gradient(135deg,#fffaf7,#fff5ed,#f8f3ff);
+
+  box-shadow:
+    0 7px 17px rgba(108,82,75,.05);
+}
+
+.summary::before{
+  content:"✦";
+  position:absolute;
+
+  left:17px;
+  top:12px;
+
+  color:#d2aa69;
+  font-size:12px;
+  opacity:.52;
+}
+
+.summary::after{
+  content:"♡";
+  position:absolute;
+
+  right:17px;
+  bottom:11px;
+
+  color:#d7a5ae;
+  font-size:13px;
+  opacity:.55;
+}
+
+.summary-icon{
+  position:relative;
+  z-index:1;
+
+  margin-bottom:5px;
+
+  font-size:36px;
+  line-height:1.2;
+}
+
+.summary-title{
+  position:relative;
+  z-index:1;
+
+  margin-top:4px;
+
+  color:#765f5b;
+
+  font-size:17px;
+  font-weight:900;
+}
+
+.summary-text{
+  position:relative;
+  z-index:1;
+
+  margin-top:6px;
+
+  color:#967d78;
+
+  font-size:13px;
+  line-height:1.75;
+}
+
+@media(max-width:600px){
+
+  .summary{
+    padding:18px 15px;
+  }
+
+  .summary-icon{
+    font-size:33px;
+  }
+
+  .summary-title{
+    font-size:16px;
+  }
+
 }  
 </style>
 </head>
