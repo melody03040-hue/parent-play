@@ -437,6 +437,398 @@ button:hover{
   }
 
 }
+  /* ===== 第二區・家事清單 精緻奶油手帳版 ===== */
+
+.panel{
+  position:relative;
+  overflow:hidden;
+
+  margin-top:22px;
+  padding:25px;
+
+  border:1px solid rgba(232,214,208,.82);
+  border-radius:29px;
+
+  background:
+    radial-gradient(circle at 95% 5%,rgba(245,224,232,.28),transparent 20%),
+    linear-gradient(145deg,#fffefd,#fff9f6);
+
+  box-shadow:
+    0 11px 28px rgba(108,82,75,.065);
+}
+
+.panel::before{
+  content:"";
+  position:absolute;
+
+  width:110px;
+  height:110px;
+
+  right:-50px;
+  top:-52px;
+
+  border-radius:50%;
+
+  background:rgba(235,225,249,.20);
+
+  pointer-events:none;
+}
+
+.panel > *{
+  position:relative;
+  z-index:1;
+}
+
+.section-title{
+  margin:0 0 17px;
+
+  color:#765f5b;
+
+  font-size:20px;
+  font-weight:900;
+}
+
+/* 新增家事輸入區 */
+.form-row{
+  display:flex;
+  gap:10px;
+}
+
+/* 輸入框 */
+.form-row input{
+  flex:1;
+
+  min-width:0;
+  padding:13px 15px;
+
+  border:1px solid #ecdcd7;
+  border-radius:15px;
+
+  outline:none;
+
+  background:#fffafa;
+  color:#765f5b;
+
+  font-family:inherit;
+  font-size:14px;
+
+  transition:.18s ease;
+}
+
+.form-row input:focus{
+  border-color:#e3b4bd;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 0 4px rgba(238,190,201,.14);
+}
+
+/* 新增家事按鈕 */
+.add-btn{
+  flex:0 0 auto;
+
+  padding:0 20px;
+
+  border:1px solid #dfb5bd;
+  border-radius:15px;
+
+  background:
+    linear-gradient(135deg,#e6a9b6,#d8b9df);
+
+  color:#fff;
+
+  font-family:inherit;
+  font-size:13px;
+  font-weight:900;
+
+  box-shadow:
+    0 6px 15px rgba(199,151,174,.18);
+}
+
+/* 家事小標籤區 */
+.chore-list{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:9px;
+  margin-top:18px;
+}
+
+/* 每個家事標籤 */
+.chore-tag{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:9px 12px;
+
+  border:1px solid #eadbcf;
+  border-radius:999px;
+
+  background:
+    linear-gradient(135deg,#fff8ee,#fff4f3);
+
+  color:#856d67;
+
+  font-size:13px;
+  font-weight:800;
+
+  box-shadow:
+    0 4px 10px rgba(105,82,74,.04);
+}
+
+/* 刪除小叉叉 */
+.chore-tag button{
+  width:21px;
+  height:21px;
+
+  display:grid;
+  place-items:center;
+
+  padding:0;
+
+  border:0;
+  border-radius:50%;
+
+  background:#f8e4e6;
+
+  color:#b27d83;
+
+  font-size:11px;
+  line-height:1;
+}
+
+/* 手機 */
+@media(max-width:600px){
+
+  .panel{
+    padding:19px;
+  }
+
+  .form-row{
+    flex-direction:column;
+  }
+
+  .add-btn{
+    min-height:44px;
+    padding:12px 16px;
+  }
+
+}
+ /* ===== 第三區・抽籤結果卡 精緻奶油手帳版 ===== */
+
+.draw-box{
+  text-align:center;
+  padding:34px 22px;
+}
+
+/* 小標題 */
+.draw-label{
+  color:#a1827d;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+/* 抽籤結果 */
+.result{
+  position:relative;
+  overflow:hidden;
+
+  width:min(520px,100%);
+  min-height:105px;
+
+  display:grid;
+  place-items:center;
+
+  margin:15px auto 22px;
+  padding:22px;
+
+  border:1px dashed #e5c9c6;
+  border-radius:24px;
+
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,224,232,.42),transparent 23%),
+    radial-gradient(circle at 88% 82%,rgba(232,225,249,.45),transparent 24%),
+    linear-gradient(135deg,#fffaf5,#fff4ec,#f8f3ff);
+
+  color:#7b625e;
+
+  font-size:28px;
+  font-weight:900;
+  line-height:1.5;
+
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,.38),
+    0 9px 20px rgba(108,82,75,.05);
+}
+
+.result::before{
+  content:"✦";
+  position:absolute;
+  left:18px;
+  top:12px;
+
+  color:#d4ad68;
+  font-size:12px;
+  opacity:.5;
+}
+
+.result::after{
+  content:"♡";
+  position:absolute;
+  right:18px;
+  bottom:12px;
+
+  color:#d7a4ad;
+  font-size:13px;
+  opacity:.55;
+}
+
+/* 抽籤按鈕 */
+.draw-btn{
+  min-width:190px;
+  min-height:48px;
+
+  padding:14px 26px;
+
+  border:1px solid #dcb3bd;
+  border-radius:17px;
+
+  background:
+    linear-gradient(135deg,#e5a8b5,#d8b8df);
+
+  color:white;
+
+  font-family:inherit;
+  font-size:16px;
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 8px 18px rgba(199,151,174,.22);
+
+  transition:.18s ease;
+}
+
+.draw-btn:hover{
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 11px 22px rgba(199,151,174,.25);
+}
+
+/* 手機 */
+@media(max-width:600px){
+
+  .draw-box{
+    padding:28px 16px;
+  }
+
+  .result{
+    min-height:95px;
+    font-size:24px;
+  }
+
+  .draw-btn{
+    width:100%;
+  }
+
+}
+ /* ===== 第四區・最近抽籤紀錄 精緻奶油手帳版 ===== */
+
+.history{
+  display:grid;
+  gap:10px;
+}
+
+/* 每一筆抽籤紀錄 */
+.history-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+
+  padding:13px 15px;
+
+  border:1px solid #eadfd9;
+  border-radius:16px;
+
+  background:
+    linear-gradient(135deg,#fffaf6,#fff7f3);
+
+  color:#806965;
+
+  box-shadow:
+    0 4px 10px rgba(105,82,74,.035);
+}
+
+.history-item strong{
+  color:#755f5a;
+  font-size:14px;
+}
+
+.history-item span{
+  color:#a08883;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+/* 沒有紀錄時 */
+.empty{
+  padding:22px 16px;
+
+  border:1px dashed #e7d8d2;
+  border-radius:18px;
+
+  background:#fffaf8;
+
+  color:#a28a85;
+
+  text-align:center;
+  font-size:13px;
+}
+
+/* 清除紀錄 */
+.clear-btn{
+  margin-top:16px;
+  padding:10px 16px;
+
+  border:1px solid #ead3d0;
+  border-radius:14px;
+
+  background:
+    linear-gradient(135deg,#f9ece9,#f4e8ef);
+
+  color:#97746f;
+
+  font-family:inherit;
+  font-size:12px;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+/* 手機 */
+@media(max-width:600px){
+
+  .history-item{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:5px;
+  }
+
+  .history-item span{
+    white-space:normal;
+  }
+
+  .clear-btn{
+    width:100%;
+  }
+
+} 
 </style>
 </head>
 
