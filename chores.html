@@ -397,7 +397,46 @@ button:hover{
   .hero-art{
     font-size:64px;
   }
-} 
+}
+  /* ===== 家事抽籤 Hero 圖片 ===== */
+
+.chores-hero-image{
+  display:block;
+  width:320px;
+  max-width:100%;
+  height:auto;
+  object-fit:contain;
+  border-radius:24px;
+
+  filter:
+    drop-shadow(0 12px 18px rgba(112,83,78,.10));
+}
+
+@media(max-width:650px){
+
+  .chores-hero-image{
+    width:280px;
+  }
+
+}
+
+/* iPhone 小螢幕也保留 Hero 圖片 */
+@media(max-width:520px){
+
+  .hero-art{
+    display:block;
+    width:100%;
+    min-width:0;
+  }
+
+  .chores-hero-image{
+    display:block;
+    width:260px;
+    max-width:100%;
+    margin:0 auto;
+  }
+
+}
 </style>
 </head>
 
@@ -434,8 +473,12 @@ button:hover{
     </div>
 
     <div class="hero-art">
-      🐰🧺✨
-    </div>
+  <img
+    src="chores-hero.png"
+    alt="家事抽籤兔兔插畫"
+    class="chores-hero-image"
+  >
+</div>
 
   </div>
 </section>
