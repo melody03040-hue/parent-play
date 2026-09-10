@@ -244,6 +244,160 @@ button:hover{
     font-size:25px;
   }
 }
+ /* ===== 家事抽籤 Hero・精緻奶油手帳版 ===== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:38px 42px;
+  border-radius:34px;
+
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,222,228,.54),transparent 24%),
+    radial-gradient(circle at 88% 80%,rgba(227,238,219,.62),transparent 26%),
+    linear-gradient(135deg,#fffaf6,#fff3e7,#f5f3ea);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  left:-55px;
+  bottom:-75px;
+  border-radius:50%;
+  background:rgba(255,255,255,.45);
+}
+
+.hero::after{
+  content:"✦  🧺  ♡";
+  position:absolute;
+  right:30px;
+  top:18px;
+  color:#cfa96c;
+  font-size:14px;
+  letter-spacing:7px;
+  opacity:.58;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.hero-copy{
+  flex:1;
+}
+
+.hero-kicker{
+  margin-bottom:8px;
+  color:#c69aa2;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2.5px;
+}
+
+.hero h1{
+  margin:0;
+  color:#765d5a;
+  font-size:34px;
+  line-height:1.45;
+}
+
+.hero-highlight{
+  position:relative;
+  display:inline-block;
+  margin-left:5px;
+  padding:0 9px 3px;
+  color:#8a6664;
+  z-index:1;
+}
+
+.hero-highlight::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:2px;
+  height:52%;
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f9dfe5,
+      #fff0d4,
+      #e5efdc
+    );
+
+  transform:rotate(-1deg);
+  z-index:-1;
+}
+
+.hero p{
+  margin:12px 0 0;
+  color:#957975;
+  line-height:1.8;
+}
+
+.hero-stickers{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+.hero-stickers span{
+  padding:7px 12px;
+  border-radius:999px;
+
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(224,196,192,.55);
+
+  color:#8d7470;
+  font-size:12px;
+  font-weight:800;
+
+  box-shadow:0 4px 10px rgba(112,83,78,.05);
+}
+
+.hero-art{
+  flex:0 0 auto;
+  min-width:190px;
+  text-align:center;
+  font-size:72px;
+
+  filter:
+    drop-shadow(0 10px 12px rgba(114,85,80,.10));
+}
+
+@media(max-width:650px){
+
+  .hero{
+    padding:30px 22px;
+  }
+
+  .hero-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero-stickers{
+    justify-content:center;
+  }
+
+  .hero-art{
+    font-size:64px;
+  }
+} 
 </style>
 </head>
 
@@ -257,12 +411,34 @@ button:hover{
 <main class="wrap">
 
   <section class="hero">
-    <h1>🧹 今天誰來做家事？</h1>
-    <p>
-      把每天的小家事變成抽籤遊戲，
-      讓孩子一起參與、一起完成，做家事也可以很有趣。
-    </p>
-  </section>
+  <div class="hero-inner">
+
+    <div class="hero-copy">
+      <div class="hero-kicker">OUR LITTLE CHORE DRAW</div>
+
+      <h1>
+        把每天的小家事
+        <span class="hero-highlight">變成有趣抽籤</span>
+      </h1>
+
+      <p>
+        不知道今天誰來做什麼嗎？<br>
+        抽一個小家事，一起分工、一起完成。
+      </p>
+
+      <div class="hero-stickers">
+        <span>🧹 家事小任務</span>
+        <span>🎀 幸運抽一個</span>
+        <span>🌷 一起完成</span>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      🐰🧺✨
+    </div>
+
+  </div>
+</section>
 
   <section class="panel">
     <h2 class="section-title">🌷 家事清單</h2>
