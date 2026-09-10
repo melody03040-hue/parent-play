@@ -522,6 +522,438 @@ body{
   }
 
 }
+  /* ===== 第二區・成就統計卡 精緻馬卡龍版 ===== */
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+
+.stat{
+  position:relative;
+  overflow:hidden;
+
+  min-height:108px;
+  padding:18px 15px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  border:1px solid rgba(231,211,205,.78);
+  border-radius:23px;
+
+  box-shadow:
+    0 9px 22px rgba(105,82,74,.055),
+    inset 0 0 0 3px rgba(255,255,255,.38);
+}
+
+/* 第一張：已解鎖 */
+.stat:nth-child(1){
+  background:
+    linear-gradient(135deg,#fff1d9,#fff8ec);
+}
+
+/* 第二張：全部徽章 */
+.stat:nth-child(2){
+  background:
+    linear-gradient(135deg,#fff0f3,#fff8f6);
+}
+
+/* 第三張：收藏進度 */
+.stat:nth-child(3){
+  background:
+    linear-gradient(135deg,#eee8fb,#f8f4ff);
+}
+
+/* 小裝飾 */
+.stat::before{
+  position:absolute;
+  right:12px;
+  top:9px;
+
+  font-size:14px;
+  opacity:.38;
+}
+
+.stat:nth-child(1)::before{
+  content:"🏅";
+}
+
+.stat:nth-child(2)::before{
+  content:"🎀";
+}
+
+.stat:nth-child(3)::before{
+  content:"🌷";
+}
+
+.stat-number{
+  position:relative;
+
+  color:#765f5b;
+  font-size:29px;
+  font-weight:900;
+  line-height:1.2;
+}
+
+.stat-label{
+  position:relative;
+
+  margin-top:6px;
+
+  color:#927a75;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* 手機版 */
+@media(max-width:600px){
+
+  .summary{
+    gap:7px;
+  }
+
+  .stat{
+    min-height:92px;
+    padding:14px 7px;
+    border-radius:18px;
+  }
+
+  .stat-number{
+    font-size:24px;
+  }
+
+  .stat-label{
+    font-size:11px;
+  }
+
+}
+ /* ===== 第三區・成就徽章卡片 精緻收藏牆版 ===== */
+
+.badge-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.badge{
+  position:relative;
+  overflow:hidden;
+
+  min-height:235px;
+  padding:23px 17px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  border:1px solid rgba(231,215,209,.85);
+  border-radius:25px;
+
+  transition:.2s ease;
+}
+
+/* 已解鎖 */
+.badge.unlocked{
+  background:
+    radial-gradient(circle at 84% 12%,rgba(255,229,178,.55),transparent 22%),
+    radial-gradient(circle at 12% 88%,rgba(245,220,229,.45),transparent 24%),
+    linear-gradient(145deg,#fffdf8,#fff6df);
+
+  box-shadow:
+    0 11px 27px rgba(145,116,66,.10),
+    inset 0 0 0 3px rgba(255,255,255,.40);
+}
+
+/* 已解鎖小亮點 */
+.badge.unlocked::before{
+  content:"✦";
+  position:absolute;
+  right:15px;
+  top:11px;
+
+  color:#d7aa55;
+  font-size:13px;
+  opacity:.6;
+}
+
+/* 未解鎖 */
+.badge.locked{
+  opacity:.68;
+
+  background:
+    linear-gradient(145deg,#faf7f6,#f5f0ef);
+
+  filter:none;
+}
+
+/* 徽章圓形圖示 */
+.badge-icon{
+  width:82px;
+  height:82px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:14px;
+
+  border-radius:50%;
+
+  background:#f4ece9;
+
+  font-size:40px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(226,210,204,.70);
+}
+
+/* 已解鎖圖示 */
+.unlocked .badge-icon{
+  background:
+    linear-gradient(145deg,#fff3c9,#ffe9af);
+
+  box-shadow:
+    0 0 0 7px rgba(255,239,193,.38),
+    0 7px 16px rgba(174,138,69,.10);
+}
+
+/* 未解鎖圖示 */
+.locked .badge-icon{
+  background:
+    linear-gradient(145deg,#f2ecea,#ebe4e2);
+
+  color:#a99892;
+}
+
+/* 標題 */
+.badge-title{
+  margin-bottom:7px;
+
+  color:#745e59;
+  font-size:18px;
+  font-weight:900;
+  line-height:1.4;
+}
+
+/* 說明 */
+.badge-desc{
+  max-width:210px;
+
+  color:#97827c;
+  font-size:13px;
+  line-height:1.65;
+}
+
+/* 狀態膠囊 */
+.badge-status{
+  margin-top:14px;
+  padding:7px 12px;
+
+  border-radius:999px;
+
+  font-size:11px;
+  font-weight:900;
+}
+
+/* 已解鎖狀態 */
+.unlocked .badge-status{
+  border:1px solid #ead39a;
+
+  background:
+    linear-gradient(135deg,#fff3c9,#fff7df);
+
+  color:#92723d;
+}
+
+/* 未解鎖狀態 */
+.locked .badge-status{
+  border:1px solid #e3d8d4;
+
+  background:#f4eeec;
+
+  color:#9c8983;
+}
+
+/* 滑鼠移過去 */
+.badge:hover{
+  transform:translateY(-2px);
+}
+
+.badge.unlocked:hover{
+  box-shadow:
+    0 14px 32px rgba(145,116,66,.13),
+    inset 0 0 0 3px rgba(255,255,255,.40);
+}
+
+/* 平板 */
+@media(max-width:820px){
+
+  .badge-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+/* 手機 */
+@media(max-width:520px){
+
+  .badge-grid{
+    grid-template-columns:1fr;
+  }
+
+  .badge{
+    min-height:215px;
+    padding:20px 15px;
+  }
+
+}
+ /* ===== 第四區・徽章收藏進度＋提示框 ===== */
+
+.progress-area{
+  margin-top:24px;
+  padding-top:4px;
+}
+
+.progress-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:8px;
+
+  color:#8f7872;
+  font-size:13px;
+  font-weight:800;
+}
+
+.progress-head strong{
+  color:#7d6762;
+}
+
+/* 進度條底色 */
+.progress-bar{
+  height:12px;
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f2e9e5,
+      #f3edf7
+    );
+
+  box-shadow:
+    inset 0 1px 3px rgba(105,82,74,.06);
+}
+
+/* 已完成進度 */
+.progress-fill{
+  height:100%;
+  width:0;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #e9b8c0,
+      #efd89c,
+      #d8c5ef
+    );
+
+  box-shadow:
+    0 2px 6px rgba(173,145,106,.12);
+
+  transition:.4s ease;
+}
+
+/* 提示框 */
+.tip{
+  position:relative;
+  overflow:hidden;
+
+  margin-top:20px;
+  padding:16px 18px;
+
+  border:1px dashed #ead8c5;
+  border-radius:18px;
+
+  background:
+    radial-gradient(circle at 92% 20%,rgba(238,227,250,.45),transparent 22%),
+    linear-gradient(135deg,#fff9e9,#fff5ef);
+
+  color:#8c756e;
+
+  font-size:13px;
+  line-height:1.75;
+
+  box-shadow:
+    0 7px 18px rgba(103,79,72,.04);
+}
+
+.tip::after{
+  content:"✦";
+  position:absolute;
+  right:14px;
+  top:10px;
+
+  color:#d4ad6b;
+  font-size:11px;
+  opacity:.45;
+}
+
+/* Footer */
+.footer{
+  width:max-content;
+  max-width:100%;
+
+  margin:30px auto 0;
+  padding:12px 23px;
+
+  text-align:center;
+
+  border:1px dashed rgba(224,194,190,.75);
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,248,242,.95),
+      rgba(255,241,245,.90),
+      rgba(247,241,255,.90)
+    );
+
+  color:#987c77;
+
+  font-size:13px;
+  font-weight:800;
+
+  box-shadow:
+    0 7px 18px rgba(105,82,74,.05);
+}
+
+.footer::before{
+  content:"✦";
+  margin-right:8px;
+  color:#d3ad70;
+}
+
+.footer::after{
+  content:"♡";
+  margin-left:8px;
+  color:#d7a4ae;
+} 
 </style>
 </head>
 
